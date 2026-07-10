@@ -47,6 +47,9 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 - **Light + dark mode** — respects `prefers-color-scheme` and remembers a manual toggle (no flash on load).
 - **Self-hosted type** — Fraunces (display), Public Sans (body), and JetBrains Mono (code) via `@fontsource`, no external font CDN.
 - **Tags** — per-tag archive pages at `/blog/tags/[tag]`.
+- **Pagination** — blog and tag archives paginate every 10 posts with hairline prev/next links.
+- **Static search** — zero-backend full-text search at `/search` powered by [Pagefind](https://pagefind.app/), indexed at build time.
+- **Auto OG images** — per-post and per-work Open Graph images rendered at build time with `satori` + `sharp`.
 - **Table of contents** — blog posts get an auto-generated sidebar TOC from their headings.
 - **RSS feed** — generated at `/rss.xml` with `@astrojs/rss`.
 - **Syntax highlighting** — Shiki dual themes (light/dark) wired to the active color scheme.
