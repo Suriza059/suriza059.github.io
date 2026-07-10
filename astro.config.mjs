@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { remarkReadingTime } from './remark-reading-time.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,6 +14,7 @@ export default defineConfig({
   base: '/astro-keel',
   integrations: [mdx(), sitemap()],
   markdown: {
+    remarkPlugins: [remarkReadingTime],
     // Dual Shiki themes; `defaultColor: false` emits CSS variables
     // (--shiki-light / --shiki-dark) so global.css can switch with the theme.
     shikiConfig: {
