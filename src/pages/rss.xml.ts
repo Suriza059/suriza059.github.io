@@ -2,6 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 import { withBase } from '../lib/url';
+import { SITE } from '../consts';
 
 export async function GET(context: APIContext) {
   const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -9,8 +10,8 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    title: 'Astro Keel',
-    description: 'Notes, essays, and release logs from Astro Keel.',
+    title: SITE.title,
+    description: SITE.rssDescription,
     site: context.site ?? 'https://example.com',
     items: posts.map((post) => ({
       title: post.data.title,

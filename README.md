@@ -21,6 +21,20 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 [![Node.js](https://img.shields.io/badge/Node.js-22+-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![MDX](https://img.shields.io/badge/MDX-1B1F24?style=flat-square&logo=mdx&logoColor=white)](https://mdxjs.com)
 
+<br />
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/preview-dark.png" />
+  <img src=".github/assets/preview-light.png" alt="Astro Keel home page" width="800" />
+</picture>
+
+<table>
+  <tr>
+    <td><img src=".github/assets/preview-post-dark.png" alt="Blog post with table of contents and syntax highlighting, dark mode" /></td>
+    <td><img src=".github/assets/preview-works-light.png" alt="Works index page, light mode" /></td>
+  </tr>
+</table>
+
 </div>
 
 > **Keel** — the structural backbone of a ship. The name reflects the design intent: stripped of ornament, all structure and spine.
@@ -28,10 +42,12 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 ## Features
 
 - **Portfolio + blog** — dedicated `works` and `blog` content collections with individual pages.
+- **One-file site config** — site name, description, nav, and footer live in `src/consts.ts`.
 - **One-line accent color** — retune the whole theme by changing a single CSS variable (`--color-accent`).
 - **Light + dark mode** — respects `prefers-color-scheme` and remembers a manual toggle (no flash on load).
 - **Self-hosted type** — Fraunces (display), Public Sans (body), and JetBrains Mono (code) via `@fontsource`, no external font CDN.
 - **Tags** — per-tag archive pages at `/blog/tags/[tag]`.
+- **Table of contents** — blog posts get an auto-generated sidebar TOC from their headings.
 - **RSS feed** — generated at `/rss.xml` with `@astrojs/rss`.
 - **Syntax highlighting** — Shiki dual themes (light/dark) wired to the active color scheme.
 - **SEO-ready** — canonical URLs, Open Graph, Twitter cards, and a sitemap out of the box.
@@ -44,6 +60,14 @@ Astro 7 · TypeScript · Content Collections (Content Layer API) · MDX · `@ast
 
 ## Quick start
 
+Scaffold a new project directly from this template:
+
+```sh
+npm create astro@latest -- --template kpab/astro-keel
+```
+
+Or click **Use this template** on GitHub, then:
+
 ```sh
 npm install
 npm run dev      # start the dev server at http://localhost:4321
@@ -52,6 +76,20 @@ npm run preview  # preview the production build
 ```
 
 ## Configuration
+
+### Site identity
+
+Site name, default meta description, RSS description, share image, nav items, and footer text all live in one file — `src/consts.ts`:
+
+```ts
+export const SITE = {
+  title: 'Astro Keel',
+  description: 'A minimal, neutral, and modern portfolio and blog theme for Astro.',
+  // ...
+};
+```
+
+### Site URL
 
 Set your deployed URL in `astro.config.mjs` — it powers canonical links, the sitemap, and RSS:
 
@@ -134,6 +172,7 @@ heroImage: ./hero.png            # optional — relative image
 
 ```
 src/
+  consts.ts          # site name, description, nav, footer
   content/           # works/ and blog/ Markdown & MDX entries
   content.config.ts  # collection schemas (Content Layer API)
   layouts/           # BaseLayout (head, nav, theme toggle)

@@ -7,6 +7,7 @@ import '@fontsource/public-sans/700.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
 import { withBase } from '../lib/url';
+import { SITE, NAV_ITEMS } from '../consts';
 
 interface Props {
   title?: string;
@@ -15,13 +16,11 @@ interface Props {
   image?: string;
 }
 
-const siteName = 'Astro Keel';
-const defaultDescription =
-  'A minimal, neutral, and modern portfolio and blog theme for Astro.';
+const siteName = SITE.title;
 
 const {
   title = siteName,
-  description = defaultDescription,
+  description = SITE.description,
   ogType = 'website',
   image,
 } = Astro.props;
@@ -30,15 +29,8 @@ const {
 // request URL during dev so canonical/OG links still resolve.
 const siteBase = Astro.site ?? new URL(Astro.url.origin);
 const canonicalURL = new URL(Astro.url.pathname, siteBase);
-const imageURL = image ? new URL(image, siteBase) : new URL(withBase('/og.jpg'), siteBase);
+const imageURL = image ? new URL(image, siteBase) : new URL(withBase(SITE.ogImage), siteBase);
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
-
-const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/about/', label: 'About' },
-  { href: '/works/', label: 'Works' },
-  { href: '/blog/', label: 'Blog' },
-];
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) => {
@@ -82,13 +74,13 @@ const isActive = (href: string) => {
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href={withBase('/')} aria-label="Astro Keel home">
+      <a class="brand" href={withBase('/')} aria-label={`${siteName} home`}>
         <span class="brand-mark" aria-hidden="true"></span>
-        <span>Astro Keel</span>
+        <span>{siteName}</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         {
-          navItems.map((item) => (
+          NAV_ITEMS.map((item) => (
             <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
               {item.label}
             </a>
@@ -105,7 +97,7 @@ const isActive = (href: string) => {
     </main>
 
     <footer class="site-footer">
-      <p>Built with Astro Keel.</p>
+      <p>{SITE.footerText}</p>
       <a href={withBase('/blog/')}>Notes</a>
     </footer>
 
