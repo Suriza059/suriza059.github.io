@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat('en', {
@@ -32,6 +32,7 @@ const formatDate = (date: Date) =>
       <p class="lead">{entry.data.description}</p>
       <div class="entry-meta">
         <time datetime={entry.data.publishDate.toISOString()}>{formatDate(entry.data.publishDate)}</time>
+        <span>{remarkPluginFrontmatter.minutesRead}</span>
         <span>{entry.data.tags.join(' / ')}</span>
       </div>
       {
