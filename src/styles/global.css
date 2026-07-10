@@ -542,6 +542,30 @@ pre code {
   color: var(--color-text);
 }
 
+/* Pagefind search UI — mapped onto the theme tokens so it follows
+   the light/dark switch automatically. */
+#search {
+  max-width: var(--prose-width);
+  --pagefind-ui-scale: 0.9;
+  --pagefind-ui-primary: var(--color-accent);
+  --pagefind-ui-text: var(--color-text);
+  --pagefind-ui-background: var(--color-bg);
+  --pagefind-ui-border: var(--color-line);
+  --pagefind-ui-tag: var(--color-soft);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 0;
+  --pagefind-ui-image-border-radius: 0;
+  --pagefind-ui-font: var(--font-body);
+}
+
+.search-fallback {
+  margin: 0;
+  border: var(--hairline);
+  padding: 1rem 1.25rem;
+  color: var(--color-muted);
+  background: var(--color-surface);
+}
+
 .article-image {
   display: block;
   width: 100%;
