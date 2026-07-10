@@ -520,6 +520,28 @@ pre code {
   margin-top: calc(var(--baseline) * 1.35);
 }
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: var(--baseline);
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pagination a {
+  display: inline-flex;
+  min-height: 2.1rem;
+  align-items: center;
+  border: var(--hairline);
+  padding: 0.35rem 0.9rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
 .article-image {
   display: block;
   width: 100%;
