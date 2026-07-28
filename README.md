@@ -39,6 +39,11 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 
 > **Keel** — the structural backbone of a ship. The name reflects the design intent: stripped of ornament, all structure and spine.
 
+> [!NOTE]
+> **Building a directory or listings site?** Check out **[Almanac](https://almanac.p4ni.com)** —
+> a premium Astro + Cloudflare directory theme by the same author, with full-text search,
+> an admin panel, moderated submissions, and monetization built in.
+
 ## Features
 
 - **Portfolio + blog** — dedicated `works` and `blog` content collections with individual pages.
@@ -197,6 +202,15 @@ A workflow at `.github/workflows/deploy.yml` builds the site and publishes it on
 ### Other static hosts
 
 `npm run build` emits a static `dist/` that deploys as-is to Cloudflare Pages, Vercel, Netlify, or any static host. Drop `base` from `astro.config.mjs` when serving from a domain root.
+
+## More themes by kpab
+
+- **[Almanac](https://almanac.p4ni.com)** (premium) — a directory theme on Astro + Cloudflare
+  Workers + D1: bm25 full-text search, admin panel, moderated submissions, and featured-listing
+  monetization. [Get it on Gumroad →](https://kpab.gumroad.com/l/almanac)
+- [astro-haze](https://github.com/kpab/astro-haze) — glassmorphism theme for blogs, portfolios & landing pages
+- [Kepler](https://github.com/kpab/astro-kepler) — navy × orange theme for blogs, portfolios & landing pages
+- [Darkness](https://github.com/kpab/astro-darkness) — dark portfolio theme with a Three.js particle background
 
 ## License
 
