@@ -12,6 +12,9 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 
 <br />
 
+[![Lighthouse: 100/100/100/100](https://img.shields.io/badge/Lighthouse-100%20%C2%B7%20100%20%C2%B7%20100%20%C2%B7%20100-0cce6b?style=flat-square&logo=lighthouse&logoColor=white)](#lighthouse)
+<br />
+
 [![Deploy](https://img.shields.io/github/actions/workflow/status/kpab/astro-keel/deploy.yml?branch=main&style=flat-square&label=deploy)](https://github.com/kpab/astro-keel/actions/workflows/deploy.yml)
 [![License](https://img.shields.io/github/license/kpab/astro-keel?style=flat-square&color=1a1a1a)](./LICENSE)
 [![Stars](https://img.shields.io/github/stars/kpab/astro-keel?style=flat-square&color=1a1a1a)](https://github.com/kpab/astro-keel/stargazers)
@@ -62,6 +65,26 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 - **JSON-LD structured data** — `WebSite` on the home page, `BlogPosting` + `BreadcrumbList` on posts (author configurable via `SITE.author` in `src/consts.ts`).
 - **Responsive & accessible** — fluid type, hairline structure, visible focus rings.
 - **One-click deploy** — bundled GitHub Pages workflow; or ship the static `dist/` to Cloudflare Pages, Vercel, Netlify, or any static host.
+
+## Lighthouse
+
+Every page of the demo scores **100 across all four categories** — with search,
+pagination, and generated OG images all switched on.
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+| --- | :---: | :---: | :---: | :---: |
+| Home `/` | 100 | 100 | 100 | 100 |
+| Blog index `/blog/` | 100 | 100 | 100 | 100 |
+| Blog post `/blog/baseline-rhythm/` | 100 | 100 | 100 | 100 |
+| Works `/works/` | 100 | 100 | 100 | 100 |
+| Search `/search/` | 100 | 100 | 100 | 100 |
+
+<sub>Lighthouse 13.4.1, desktop preset, production build. Reproduce it yourself:</sub>
+
+```sh
+npm run build && npm run preview
+npx lighthouse http://localhost:4321/astro-keel/ --preset=desktop --view
+```
 
 ## Tech stack
 
@@ -217,6 +240,20 @@ A workflow at `.github/workflows/deploy.yml` builds the site and publishes it on
 ### Other static hosts
 
 `npm run build` emits a static `dist/` that deploys as-is to Cloudflare Pages, Vercel, Netlify, or any static host. Drop `base` from `astro.config.mjs` when serving from a domain root.
+
+## Changelog
+
+Notable changes are recorded in [CHANGELOG.md](./CHANGELOG.md), and tagged
+versions are published as [GitHub Releases](https://github.com/kpab/astro-keel/releases).
+Because this is a template rather than a dependency, upgrading means porting the
+changes you want into your own copy — each entry names the files it touches.
+
+## Contributing
+
+Bug reports, docs fixes, and focused pull requests are welcome. See
+[CONTRIBUTING.md](./CONTRIBUTING.md) for dev setup, project structure, and the
+two design rules the theme holds to (zero client JS by default; all
+configuration in `src/consts.ts`).
 
 ## More themes by kpab
 
