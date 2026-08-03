@@ -4,6 +4,8 @@
   --color-accent: oklch(0.54 0.14 35);
   --color-accent-hover: color-mix(in oklch, var(--color-accent), black 12%);
   --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 84%);
+  /* Text/icon color on top of a filled accent surface. */
+  --color-on-accent: oklch(0.99 0.003 100);
   --color-bg: oklch(0.99 0.003 100);
   --color-surface: oklch(0.965 0.004 100);
   --color-text: oklch(0.25 0.01 250);
@@ -28,6 +30,8 @@
     --color-accent: oklch(0.72 0.13 42);
     --color-accent-hover: color-mix(in oklch, var(--color-accent), white 10%);
     --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 78%);
+  /* The dark-scheme accent is light, so filled surfaces need dark text. */
+  --color-on-accent: oklch(0.18 0.009 250);
     --color-bg: oklch(0.18 0.009 250);
     --color-surface: oklch(0.22 0.01 250);
     --color-text: oklch(0.93 0.006 95);
@@ -43,6 +47,8 @@
   --color-accent: oklch(0.54 0.14 35);
   --color-accent-hover: color-mix(in oklch, var(--color-accent), black 12%);
   --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 84%);
+  /* Text/icon color on top of a filled accent surface. */
+  --color-on-accent: oklch(0.99 0.003 100);
   --color-bg: oklch(0.99 0.003 100);
   --color-surface: oklch(0.965 0.004 100);
   --color-text: oklch(0.25 0.01 250);
@@ -57,6 +63,8 @@
   --color-accent: oklch(0.72 0.13 42);
   --color-accent-hover: color-mix(in oklch, var(--color-accent), white 10%);
   --color-accent-soft: color-mix(in oklch, var(--color-accent), transparent 78%);
+  /* The dark-scheme accent is light, so filled surfaces need dark text. */
+  --color-on-accent: oklch(0.18 0.009 250);
   --color-bg: oklch(0.18 0.009 250);
   --color-surface: oklch(0.22 0.01 250);
   --color-text: oklch(0.93 0.006 95);
@@ -343,7 +351,7 @@ p {
   padding: 0.72rem 1.05rem;
   border: 1px solid var(--color-accent);
   background: var(--color-accent);
-  color: oklch(0.99 0.003 100);
+  color: var(--color-on-accent);
   font-weight: 700;
   transition:
     background 180ms ease,
