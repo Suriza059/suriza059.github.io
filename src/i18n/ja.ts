@@ -72,8 +72,8 @@ export const ja: UIStrings = {
 
   // Comments (rendered only when GISCUS.enabled)
   'comments.eyebrow': 'コメント',
-  'comments.failed':
-    'コメントを読み込めませんでした。スレッドは <a href="{url}" target="_blank" rel="noopener noreferrer">GitHub Discussions ↗</a> にあります。',
+  'comments.failed': 'コメントを読み込めませんでした。スレッドは {link} にあります。',
+  'comments.failedLink': 'GitHub Discussions ↗',
   'comments.noscript':
     'コメントの表示には JavaScript が必要です。スレッドは GitHub Discussions にあります。',
 

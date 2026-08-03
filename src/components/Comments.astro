@@ -8,8 +8,12 @@ import { t } from '../i18n';
 // never resolve a discussion.
 const enabled = Boolean(GISCUS.enabled && GISCUS.repo && GISCUS.repoId && GISCUS.categoryId);
 
-// Where to send readers when the widget itself never loads.
-const discussionsUrl = `https://github.com/${GISCUS.repo}/discussions`;
+// Where to send readers when the widget itself never loads. The anchor is
+// assembled here rather than in the dictionary so the URL goes through
+// `encodeURI` — `GISCUS.repo` is user-supplied config, and a stray quote would
+// otherwise break out of the `href`.
+const discussionsUrl = encodeURI(`https://github.com/${GISCUS.repo}/discussions`);
+const discussionsLink = `<a href="${discussionsUrl}" target="_blank" rel="noopener noreferrer">${t('comments.failedLink')}</a>`;
 ---
 
 {
@@ -37,7 +41,7 @@ const discussionsUrl = `https://github.com/${GISCUS.repo}/discussions`;
             reader, or a repository whose Giscus setup is unfinished. Without
             it, the reader is left staring at a labelled but permanently empty
             box with no explanation. */}
-        <p class="comments-fallback" data-giscus-fallback hidden set:html={t('comments.failed', { url: discussionsUrl })} />
+        <p class="comments-fallback" data-giscus-fallback hidden set:html={t('comments.failed', { link: discussionsLink })} />
         <noscript>
           <p class="comments-fallback">{t('comments.noscript')}</p>
         </noscript>

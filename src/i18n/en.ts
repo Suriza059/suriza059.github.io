@@ -84,10 +84,11 @@ export const en = {
 
   // Comments (rendered only when GISCUS.enabled)
   'comments.eyebrow': 'Comments',
-  // `{url}` is the repository's discussions page; the link markup lives in the
-  // string so a translation can put it wherever the sentence needs it.
-  'comments.failed':
-    'Comments could not be loaded. Read the thread on <a href="{url}" target="_blank" rel="noopener noreferrer">GitHub Discussions ↗</a>.',
+  // `{link}` is a whole anchor element, built in Comments.astro — a translation
+  // decides where in the sentence it lands, and the URL never has to be
+  // interpolated into the dictionary value.
+  'comments.failed': 'Comments could not be loaded. Read the thread on {link}.',
+  'comments.failedLink': 'GitHub Discussions ↗',
   'comments.noscript': 'Comments require JavaScript. They are hosted on GitHub Discussions.',
 
   // Works
