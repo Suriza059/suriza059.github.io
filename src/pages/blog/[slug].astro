@@ -5,11 +5,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { withBase } from '../../lib/url';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('blog', ({ data }) => !data.draft);
-  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+  // Newest-first, same ordering as the blog index.
+  const entries = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+  );
+  return entries.map((entry, index) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      newer: entries[index - 1] ?? null,
+      older: entries[index + 1] ?? null,
+    },
+  }));
 }
 
-const { entry } = Astro.props;
+const { entry, newer, older } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 
 const formatDate = (date: Date) =>
@@ -65,4 +75,29 @@ const formatDate = (date: Date) =>
       </div>
     </div>
   </article>
+
+  {
+    (older || newer) && (
+      <nav class="section post-nav-section" aria-label="Adjacent posts">
+        <div class="post-nav">
+          {older ? (
+            <a rel="prev" href={withBase(`/blog/${older.id}/`)}>
+              <span class="post-nav-label">Previous</span>
+              <span class="post-nav-title">{older.data.title}</span>
+            </a>
+          ) : (
+            <span aria-hidden="true" />
+          )}
+          {newer ? (
+            <a rel="next" class="post-nav-next" href={withBase(`/blog/${newer.id}/`)}>
+              <span class="post-nav-label">Next</span>
+              <span class="post-nav-title">{newer.data.title}</span>
+            </a>
+          ) : (
+            <span aria-hidden="true" />
+          )}
+        </div>
+      </nav>
+    )
+  }
 </BaseLayout>
