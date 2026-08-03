@@ -74,13 +74,16 @@ const isActive = (href: string) => {
     <script is:inline>
       // Runs before paint on the initial load, and again on `astro:after-swap`
       // because the router resets `<html>` attributes during soft navigation.
-      const applyTheme = () => {
-        const storedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.dataset.theme = storedTheme || (prefersDark ? 'dark' : 'light');
-      };
-      applyTheme();
-      document.addEventListener('astro:after-swap', applyTheme);
+      // IIFE so top-level consts can't clash if the script ever re-runs.
+      (() => {
+        const applyTheme = () => {
+          const storedTheme = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.dataset.theme = storedTheme || (prefersDark ? 'dark' : 'light');
+        };
+        applyTheme();
+        document.addEventListener('astro:after-swap', applyTheme);
+      })();
     </script>
   </head>
   <body>
