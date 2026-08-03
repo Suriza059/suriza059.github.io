@@ -4,6 +4,8 @@ import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Pagination from '../../../../components/Pagination.astro';
 import { withBase } from '../../../../lib/url';
+import { SITE } from '../../../../consts';
+import { formatDate, t } from '../../../../i18n';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -32,31 +34,24 @@ const readingTimes = new Map(
   ),
 );
 
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat('en', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(date);
-
 const pageTitle =
   page.currentPage === 1
-    ? `Posts tagged “${tag}”`
-    : `Posts tagged “${tag}” · Page ${page.currentPage}`;
+    ? t('tag.title', { tag })
+    : t('tag.titlePaged', { tag, page: page.currentPage });
 ---
 
-<BaseLayout title={pageTitle} description={`Blog posts tagged ${tag} on Astro Keel.`}>
+<BaseLayout title={pageTitle} description={t('tag.description', { tag, site: SITE.title })}>
   <section class="page-head section">
-    <p class="eyebrow">Tag</p>
+    <p class="eyebrow">{t('tag.eyebrow')}</p>
     <h1>{tag}</h1>
-    <p class="lead">Notes collected under the {tag} tag.</p>
+    <p class="lead">{t('tag.lead', { tag })}</p>
   </section>
 
-  <section class="section content-index" aria-label={`${tag} posts`}>
+  <section class="section content-index" aria-label={t('tag.listLabel', { tag })}>
     <div class="index-sidebar">
-      <p class="eyebrow">More tags</p>
-      <nav class="tag-cloud" aria-label="Other blog tags">
-        <a href={withBase('/blog/')}>All posts</a>
+      <p class="eyebrow">{t('tag.moreTagsEyebrow')}</p>
+      <nav class="tag-cloud" aria-label={t('tag.otherTagsNavLabel')}>
+        <a href={withBase('/blog/')}>{t('tag.allPosts')}</a>
         {otherTags.map((item) => <a href={withBase(`/blog/tags/${item}/`)}>{item}</a>)}
       </nav>
     </div>
@@ -67,7 +62,7 @@ const pageTitle =
           taggedPosts.map((post) => (
             <article class="entry-card">
               <div class="entry-meta">
-                <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate)}</time>
+                <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate, 'short')}</time>
                 <span>{readingTimes.get(post.id)}</span>
                 <span>{post.data.tags.join(' / ')}</span>
               </div>
