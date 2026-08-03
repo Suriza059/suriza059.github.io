@@ -40,6 +40,20 @@ export const t = (key: UIKey, params?: Record<string, string | number>): string 
   );
 };
 
+/**
+ * Render a post's reading time.
+ *
+ * `remarkPluginFrontmatter` is untyped, and the Content Layer store in
+ * `node_modules/.astro/` survives an upgrade — so `minutesRead` may still be
+ * the preformatted `"3 min read"` string this theme used to emit. Interpolating
+ * that into `post.readingTime` would print "3 min read min read"; going the
+ * other way would print a bare "3". Passing an unexpected value straight
+ * through degrades to readable-but-untranslated text until the store is
+ * rebuilt, instead of showing either kind of garbage.
+ */
+export const readingTime = (minutesRead: unknown): string =>
+  typeof minutesRead === 'number' ? t('post.readingTime', { minutes: minutesRead }) : String(minutesRead ?? '');
+
 /** Format a publish date in the active locale. `long` spells the month out;
  *  `short` abbreviates it. Both are locale-aware, including field order. */
 export const formatDate = (date: Date, style: 'long' | 'short' = 'long'): string =>

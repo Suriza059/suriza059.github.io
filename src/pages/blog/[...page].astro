@@ -5,7 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Pagination from '../../components/Pagination.astro';
 import { withBase } from '../../lib/url';
 import { SITE } from '../../consts';
-import { formatDate, t } from '../../i18n';
+import { formatDate, readingTime, t } from '../../i18n';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -26,7 +26,7 @@ const readingTimes = new Map(
   await Promise.all(
     posts.map(async (post) => {
       const { remarkPluginFrontmatter } = await render(post);
-      return [post.id, remarkPluginFrontmatter.minutesRead as number] as const;
+      return [post.id, readingTime(remarkPluginFrontmatter.minutesRead)] as const;
     }),
   ),
 );
@@ -60,7 +60,7 @@ const pageTitle =
             <article class="entry-card">
               <div class="entry-meta">
                 <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate, 'short')}</time>
-                <span>{t('post.readingTime', { minutes: readingTimes.get(post.id) ?? 1 })}</span>
+                <span>{readingTimes.get(post.id)}</span>
                 <span>{post.data.tags.join(' / ')}</span>
               </div>
               <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>

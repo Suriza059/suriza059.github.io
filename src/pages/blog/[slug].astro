@@ -6,7 +6,7 @@ import StructuredData from '../../components/StructuredData.astro';
 import Comments from '../../components/Comments.astro';
 import { withBase } from '../../lib/url';
 import { SITE } from '../../consts';
-import { formatDate, t } from '../../i18n';
+import { formatDate, readingTime, t } from '../../i18n';
 
 export async function getStaticPaths() {
   // Newest-first, same ordering as the blog index.
@@ -85,7 +85,7 @@ const schema = [
       <p class="lead">{entry.data.description}</p>
       <div class="entry-meta">
         <time datetime={entry.data.publishDate.toISOString()}>{formatDate(entry.data.publishDate)}</time>
-        <span>{t('post.readingTime', { minutes: remarkPluginFrontmatter.minutesRead })}</span>
+        <span>{readingTime(remarkPluginFrontmatter.minutesRead)}</span>
         <span>{entry.data.tags.join(' / ')}</span>
       </div>
       {
