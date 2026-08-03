@@ -36,9 +36,9 @@ npm run check    # astro check — must report 0 errors
 npm run build    # must succeed; also runs `pagefind` via postbuild
 ```
 
-`npm run check` currently emits two Zod deprecation hints from Astro's content
-schema API. Those are pre-existing — new *errors* are not acceptable, new hints
-should be avoided.
+`npm run check` currently emits four hints: two Zod deprecations from Astro's
+content schema API, and two unused-`Props` hints in the paginated routes. Those
+are pre-existing — new *errors* are not acceptable, new hints should be avoided.
 
 ## Project structure
 
@@ -95,11 +95,21 @@ Maintainers only.
    git push origin main --tags
    ```
 
-4. Publish the GitHub Release with the changelog section as the body:
+4. Publish the GitHub Release, using that changelog section as the body — paste
+   it in and close with `Ctrl-D`:
 
    ```sh
-   gh release create vx.y.z --title "vx.y.z" --notes-file <(…)
+   gh release create vx.y.z --title "vx.y.z" --notes-file -
    ```
+
+The Lighthouse table in the README is a hand-recorded snapshot, not a live
+badge — re-run it before cutting a release so a regression can't sit behind a
+stale 100:
+
+```sh
+npm run build && npm run preview
+npx lighthouse http://localhost:4321/astro-keel/ --preset=desktop --view
+```
 
 Versioning is [Semantic Versioning](https://semver.org/): a breaking change to
 `src/consts.ts`, the content schemas, or the required Node version bumps the
