@@ -10,6 +10,9 @@ export const SITE = {
   rssDescription: 'Notes, essays, and release logs from Astro Keel.',
   /** Default social share image, relative to the site root (see public/). */
   ogImage: '/og.jpg',
+  /** Post author, emitted in JSON-LD BlogPosting structured data.
+   *  Leave empty ('') to omit the author field. */
+  author: 'Astro Keel',
   /** Footer credit line. */
   footerText: 'Built with Astro Keel.',
 } as const;

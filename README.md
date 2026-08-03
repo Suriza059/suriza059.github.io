@@ -59,6 +59,7 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 - **RSS feed** — generated at `/rss.xml` with `@astrojs/rss`.
 - **Syntax highlighting** — Shiki dual themes (light/dark) wired to the active color scheme.
 - **SEO-ready** — canonical URLs, Open Graph, Twitter cards, and a sitemap out of the box.
+- **JSON-LD structured data** — `WebSite` on the home page, `BlogPosting` + `BreadcrumbList` on posts (author configurable via `SITE.author` in `src/consts.ts`).
 - **Responsive & accessible** — fluid type, hairline structure, visible focus rings.
 - **One-click deploy** — bundled GitHub Pages workflow; or ship the static `dist/` to Cloudflare Pages, Vercel, Netlify, or any static host.
 
@@ -93,6 +94,7 @@ Site name, default meta description, RSS description, share image, nav items, an
 export const SITE = {
   title: 'Astro Keel',
   description: 'A minimal, neutral, and modern portfolio and blog theme for Astro.',
+  author: 'Your Name', // emitted in JSON-LD BlogPosting; '' omits it
   // ...
 };
 ```

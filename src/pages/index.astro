@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import StructuredData from '../components/StructuredData.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { withBase } from '../lib/url';
+import { SITE } from '../consts';
 
 const works = (await getCollection('works'))
   .sort((a, b) => {
@@ -22,12 +24,22 @@ const formatDate = (date: Date) =>
     day: 'numeric',
     year: 'numeric',
   }).format(date);
+
+const site = Astro.site ?? new URL(Astro.url.origin);
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.title,
+  description: SITE.description,
+  url: new URL(withBase('/'), site).href,
+};
 ---
 
 <BaseLayout
   title="Astro Keel"
   description="A minimal portfolio and writing theme for careful technical work."
 >
+  <StructuredData slot="head" schema={websiteSchema} />
   <section class="hero section">
     <p class="eyebrow">Portfolio / writing / systems notes</p>
     <h1>Structural minimalism for careful digital work.</h1>
