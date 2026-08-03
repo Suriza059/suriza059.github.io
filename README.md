@@ -97,6 +97,19 @@ export const SITE = {
 };
 ```
 
+### Social links
+
+Declare social profiles in `src/consts.ts` — they render as inline SVG icons in the footer (self-hosted, `currentColor`, so they follow light/dark automatically):
+
+```ts
+export const SOCIAL_LINKS: readonly SocialLink[] = [
+  { label: 'GitHub', href: 'https://github.com/<user>/<repo>', icon: 'github' },
+  { label: 'RSS feed', href: '/rss.xml', icon: 'rss' },
+];
+```
+
+Built-in icons: `github`, `x`, `linkedin`, `rss`, `email`. Site-root paths (like `/rss.xml`) get the configured `base` applied automatically; `mailto:` and full URLs are used as-is.
+
 ### Site URL
 
 Set your deployed URL in `astro.config.mjs` — it powers canonical links, the sitemap, and RSS:
