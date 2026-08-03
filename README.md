@@ -140,8 +140,8 @@ Built-in icons: `github`, `x`, `linkedin`, `rss`, `email`. Site-root paths (like
 
 Blog posts can carry a [Giscus](https://giscus.app) thread — comments backed by
 GitHub Discussions, so there is still no backend to run. **Off by default:** with
-`enabled: false`, not a single byte of Giscus markup or script reaches the
-browser.
+`enabled: false`, not a single byte of Giscus markup, CSS, or script reaches the
+browser — the whole component, styles included, sits behind the flag.
 
 To turn it on:
 
@@ -165,7 +165,9 @@ export const GISCUS: GiscusConfig = {
 The widget loads only when the reader scrolls near it (`IntersectionObserver`),
 so it never competes with the article for bandwidth, and its theme follows the
 header's light/dark toggle live — set `lightTheme` / `darkTheme` to any Giscus
-theme name or a URL to your own theme CSS.
+theme name or a URL to your own theme CSS. If the embed never appears — a
+content blocker, an offline reader, or an unfinished repository setup — a link
+to the discussion thread replaces it rather than leaving an empty box.
 
 ### Site URL
 
