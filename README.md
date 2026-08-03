@@ -54,6 +54,7 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 - **One-line accent color** — retune the whole theme by changing a single CSS variable (`--color-accent`).
 - **Light + dark mode** — respects `prefers-color-scheme` and remembers a manual toggle (no flash on load).
 - **Self-hosted type** — Fraunces (display), Public Sans (body), and JetBrains Mono (code) via `@fontsource`, no external font CDN.
+- **i18n-ready** — every UI string lives in a typed dictionary under `src/i18n/`; one `SITE.locale` line switches the chrome, date formats, `<html lang>`, and the RSS language. `en` and `ja` included.
 - **Tags** — per-tag archive pages at `/blog/tags/[tag]`.
 - **Pagination** — blog and tag archives paginate every 10 posts with hairline prev/next links.
 - **Static search** — zero-backend full-text search at `/search` powered by [Pagefind](https://pagefind.app/), indexed at build time.
@@ -135,6 +136,70 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
 ```
 
 Built-in icons: `github`, `x`, `linkedin`, `rss`, `email`. Site-root paths (like `/rss.xml`) get the configured `base` applied automatically; `mailto:` and full URLs are used as-is.
+
+### Language
+
+Set `SITE.locale` in `src/consts.ts` to a BCP 47 tag. One line switches every
+string the theme renders, plus `<html lang>`, `og:locale`, date formatting, and
+the RSS `<language>` element — no template edits:
+
+```ts
+export const SITE = {
+  locale: 'ja', // ← 'en' and 'ja' ship with the theme
+  // ...
+};
+```
+
+Dates go through `Intl.DateTimeFormat`, so field order follows the locale too
+(`March 9, 2026` → `2026年3月9日`).
+
+#### Adding a language
+
+1. Copy `src/i18n/ja.ts` to `src/i18n/<tag>.ts` and translate the values. The
+   file is typed as `UIStrings`, so a missing or misspelled key is a build
+   error rather than a silent fallback to English.
+2. Register it in `src/i18n/index.ts`:
+
+   ```ts
+   import { fr } from './fr';
+
+   export const DICTIONARIES: Record<string, UIStrings> = { en, ja, fr };
+   ```
+
+3. Set `SITE.locale` to the new tag.
+
+`src/i18n/en.ts` is the reference dictionary and defines the shape — add new
+keys there first. It holds **UI chrome only** (navigation, pagination, button
+and section labels, aria labels, the 404 copy): roughly 60 short strings, so a
+new locale is a small pull request. The placeholder prose on the home and about
+pages stays in those `.astro` files, where you would edit it anyway.
+
+Regional variants fall back to their base language's strings (`en-GB` uses the
+`en` dictionary) while keeping their own date format, so they only need their
+own file if the wording actually differs.
+
+Nav labels come from the same dictionary via `labelKey`. A page you add yourself
+can skip the dictionary and use a literal `label` instead — the type requires
+exactly one of the two:
+
+```ts
+export const NAV_ITEMS: readonly NavItem[] = [
+  { href: '/', labelKey: 'nav.home' },
+  { href: '/uses/', label: 'Uses' },
+];
+```
+
+> [!NOTE]
+> **Non-Latin scripts and generated images.** The OG image route bundles
+> **Latin subsets** of Fraunces and Public Sans to keep builds light, and Satori
+> draws any missing glyph as an empty box. Post titles in a non-Latin script
+> need a font that covers it — install e.g. `@fontsource/noto-sans-jp` and point
+> `src/pages/og/[collection]/[slug].png.ts` at it. (The theme's own labels in
+> those images stay Latin for this reason.)
+>
+> Pagefind indexes by the document's `lang`, so `<html lang="ja">` gets proper
+> Japanese segmentation. Its Default UI strings ("Search", "Clear") are
+> translated for many languages but not all — check yours.
 
 ### Comments (optional)
 
@@ -252,9 +317,10 @@ heroImage: ./hero.png            # optional — relative image
 
 ```
 src/
-  consts.ts          # site name, description, nav, footer
+  consts.ts          # site name, description, locale, nav, footer
   content/           # works/ and blog/ Markdown & MDX entries
   content.config.ts  # collection schemas (Content Layer API)
+  i18n/              # UI dictionaries (en, ja) + t() and formatDate()
   layouts/           # BaseLayout (head, nav, theme toggle)
   pages/             # routes: /, /about, /works, /blog, tags, rss.xml
   styles/            # global.css design tokens
