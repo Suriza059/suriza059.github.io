@@ -1,5 +1,6 @@
 ---
 import type { Page } from 'astro';
+import { t } from '../i18n';
 
 interface Props {
   page: Page<unknown>;
@@ -19,12 +20,12 @@ const next = withSlash(page.url.next);
 
 {
   page.lastPage > 1 && (
-    <nav class="pagination" aria-label="Pagination">
-      {prev ? <a href={prev} rel="prev">← Newer</a> : <span aria-hidden="true" />}
+    <nav class="pagination" aria-label={t('pagination.label')}>
+      {prev ? <a href={prev} rel="prev">{t('pagination.newer')}</a> : <span aria-hidden="true" />}
       <span class="pagination-status">
-        Page {page.currentPage} of {page.lastPage}
+        {t('pagination.status', { current: page.currentPage, total: page.lastPage })}
       </span>
-      {next ? <a href={next} rel="next">Older →</a> : <span aria-hidden="true" />}
+      {next ? <a href={next} rel="next">{t('pagination.older')}</a> : <span aria-hidden="true" />}
     </nav>
   )
 }

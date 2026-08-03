@@ -36,6 +36,13 @@ written with that in mind — each one names the files it touches.
 - Sticky top bar on scroll.
 - Community health files — issue forms, a pull request template,
   `CONTRIBUTING.md`, and this changelog.
+- **Localizable UI strings.** Every string the theme itself renders now comes
+  from a typed dictionary in `src/i18n/`, selected by a new `SITE.locale`.
+  One line also drives `<html lang>`, `og:locale`, `Intl` date formatting, and
+  the RSS `<language>` element. `en` and `ja` ship with the theme; the
+  dictionary covers UI chrome only, so the placeholder prose on the home and
+  about pages stays in those `.astro` files. Nav entries take a `labelKey`
+  (dictionary) or a literal `label`, and the type requires exactly one.
 - **Optional Giscus comments** on blog posts, configured through `GISCUS` in
   `src/consts.ts` and **off by default** — a disabled build emits no Giscus
   markup, styles, or script at all. When enabled, the widget loads only once the
@@ -47,6 +54,20 @@ written with that in mind — each one names the files it touches.
 
 ### Changed
 
+- **`minutesRead` is now a number**, not a preformatted `"3 min read"` string.
+  `reading-time`'s own text is hard-coded English and would have survived every
+  `SITE.locale` change; templates render it through the `readingTime()` helper
+  in `src/i18n/` instead. If you read `remarkPluginFrontmatter.minutesRead` in a
+  template of your own, route it through that helper too — it tolerates either
+  shape.
+
+  The Content Layer keeps rendered frontmatter in
+  `node_modules/.astro/data-store.json`, and changing a remark plugin does not
+  invalidate it, so the first build after upgrading may still serve the old
+  value. Delete `node_modules/.astro/` once — clearing the repo-root `.astro/`
+  is *not* enough, it only holds generated types. The helper degrades
+  gracefully in the meantime (you would otherwise see `3 min read min read`
+  after upgrading, or a bare `3` after downgrading).
 - Site identity (title, description, RSS description, share image, author,
   footer text, nav items) is centralized in `src/consts.ts`.
 - README rewritten: badge header, light/dark preview screenshots, and expanded

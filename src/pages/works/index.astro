@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { withBase } from '../../lib/url';
+import { SITE } from '../../consts';
+import { t } from '../../i18n';
 
 const works = (await getCollection('works')).sort((a, b) => {
   const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
@@ -11,9 +13,9 @@ const works = (await getCollection('works')).sort((a, b) => {
 });
 ---
 
-<BaseLayout title="Works" description="Selected projects and case studies — Astro Keel.">
+<BaseLayout title={t('works.title')} description={`Selected projects and case studies — ${SITE.title}.`}>
   <section class="page-head section">
-    <p class="eyebrow">Works</p>
+    <p class="eyebrow">{t('works.eyebrow')}</p>
     <h1>Selected projects and case studies.</h1>
     <p class="lead">
       The works collection is typed for descriptions, technology lists, external links,
@@ -21,7 +23,7 @@ const works = (await getCollection('works')).sort((a, b) => {
     </p>
   </section>
 
-  <section class="section" aria-label="Selected works">
+  <section class="section" aria-label={t('works.listLabel')}>
     <div class="work-list">
       {
         works.map((work) => (

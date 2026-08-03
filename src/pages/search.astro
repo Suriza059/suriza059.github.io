@@ -1,26 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../lib/url';
+import { SITE } from '../consts';
+import { t } from '../i18n';
 
 const bundlePath = withBase('/pagefind/');
 ---
 
-<BaseLayout title="Search" description="Search posts and works — Astro Keel.">
+<BaseLayout title={t('search.title')} description={`Search posts and works — ${SITE.title}.`}>
   <link slot="head" rel="stylesheet" href={`${bundlePath}pagefind-ui.css`} />
   <section class="page-head section">
-    <p class="eyebrow">Search</p>
+    <p class="eyebrow">{t('search.eyebrow')}</p>
     <h1>Find posts and works.</h1>
     <p class="lead">
       Fully static search powered by Pagefind — indexed at build time, no backend required.
     </p>
   </section>
 
-  <section class="section search-section" aria-label="Site search">
+  <section class="section search-section" aria-label={t('search.sectionLabel')}>
     <div id="search" data-bundle-path={bundlePath}>
-      <p class="search-fallback">
-        The search index is generated at build time. Run <code>npm run build</code> and
-        preview the site to try it — it is not available on the dev server.
-      </p>
+      <p class="search-fallback" set:html={t('search.fallback')} />
     </div>
     <script is:inline data-astro-rerun>
       // `data-astro-rerun` re-runs this after each soft navigation, because the

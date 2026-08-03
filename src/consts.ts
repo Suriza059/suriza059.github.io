@@ -1,7 +1,14 @@
 // Site-wide settings. Edit this file to rebrand the theme — every page,
 // the RSS feed, and Open Graph tags read from here.
 
+import type { UIKey } from './i18n/en';
+
 export const SITE = {
+  /** BCP 47 language tag. Picks the UI dictionary in `src/i18n/`, and sets
+   *  `<html lang>`, date formatting, and the RSS feed language. Dictionaries
+   *  ship for `en` and `ja`; regional variants like `en-GB` reuse the base
+   *  language's strings while keeping their own date format. */
+  locale: 'en',
   /** Site name — used in the header brand, <title>, and og:site_name. */
   title: 'Astro Keel',
   /** Default meta description for pages that don't set their own. */
@@ -38,7 +45,7 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
 /** Giscus — GitHub Discussions-backed comments on blog posts.
  *  See `GISCUS` below; values come from https://giscus.app. */
 export interface GiscusConfig {
-  /** Master switch. While `false`, no Giscus markup or script is emitted. */
+  /** Master switch. While `false`, no Giscus markup, CSS, or script is emitted. */
   enabled: boolean;
   /** Target repository, `owner/name`. Needs public Discussions and the
    *  giscus GitHub App installed. */
@@ -88,12 +95,18 @@ export const GISCUS: GiscusConfig = {
   darkTheme: 'dark',
 };
 
+export type NavItem =
+  | { href: string; label: string; labelKey?: never }
+  | { href: string; labelKey: UIKey; label?: never };
+
 /** Header navigation. `href` is relative to the site root; the configured
- *  `base` is applied automatically via `withBase()`. */
-export const NAV_ITEMS = [
-  { href: '/', label: 'Home' },
-  { href: '/about/', label: 'About' },
-  { href: '/works/', label: 'Works' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/search/', label: 'Search' },
-] as const;
+ *  `base` is applied automatically via `withBase()`. The bundled entries
+ *  localize through the UI dictionary; give a page you add yourself a literal
+ *  `label` instead — one of the two is required. */
+export const NAV_ITEMS: readonly NavItem[] = [
+  { href: '/', labelKey: 'nav.home' },
+  { href: '/about/', labelKey: 'nav.about' },
+  { href: '/works/', labelKey: 'nav.works' },
+  { href: '/blog/', labelKey: 'nav.blog' },
+  { href: '/search/', labelKey: 'nav.search' },
+];

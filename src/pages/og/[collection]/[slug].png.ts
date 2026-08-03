@@ -52,6 +52,12 @@ const COLOR = {
 const require = createRequire(import.meta.url);
 const font = (pkgPath: string) => readFile(require.resolve(pkgPath));
 
+// Latin subsets, to keep the build light. Satori draws any glyph these fonts
+// lack as an empty box, which is why the `kind` labels above stay Latin rather
+// than going through the UI dictionary — `SITE.locale = 'ja'` would otherwise
+// render them as tofu in every share image. Post titles in a non-Latin script
+// hit the same limit: install a face that covers them (e.g.
+// `@fontsource/noto-sans-jp`) and point the paths below at it.
 const [fraunces, publicSans] = await Promise.all([
   font('@fontsource/fraunces/files/fraunces-latin-600-normal.woff'),
   font('@fontsource/public-sans/files/public-sans-latin-400-normal.woff'),

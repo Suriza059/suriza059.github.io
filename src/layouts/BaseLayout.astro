@@ -9,6 +9,7 @@ import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import { withBase } from '../lib/url';
 import { SITE, NAV_ITEMS } from '../consts';
+import { locale, navLabel, t } from '../i18n';
 import CodeCopy from '../components/CodeCopy.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 
@@ -43,7 +44,7 @@ const isActive = (href: string) => {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -56,15 +57,18 @@ const isActive = (href: string) => {
     <link rel="alternate" type="application/rss+xml" title={siteName} href={withBase('/rss.xml')} />
     <title>{fullTitle}</title>
 
-    <!-- Open Graph -->
+    {/* Astro comment syntax — an HTML comment here would ship on every page. */}
+    {/* Open Graph */}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
+    {/* Open Graph wants `ja_JP`, not the `ja-JP` of `<html lang>`. */}
+    <meta property="og:locale" content={locale.replace('-', '_')} />
     {imageURL && <meta property="og:image" content={imageURL} />}
 
-    <!-- Twitter -->
+    {/* Twitter */}
     <meta name="twitter:card" content={imageURL ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
@@ -88,20 +92,20 @@ const isActive = (href: string) => {
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href={withBase('/')} aria-label={`${siteName} home`}>
+      <a class="brand" href={withBase('/')} aria-label={t('nav.brandHome', { site: siteName })}>
         <span class="brand-mark" aria-hidden="true"></span>
         <span>{siteName}</span>
       </a>
-      <nav class="site-nav" aria-label="Main navigation">
+      <nav class="site-nav" aria-label={t('nav.label')}>
         {
           NAV_ITEMS.map((item) => (
             <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
-              {item.label}
+              {navLabel(item)}
             </a>
           ))
         }
       </nav>
-      <button class="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
+      <button class="theme-toggle" type="button" aria-label={t('theme.toggle')} data-theme-toggle>
         <span aria-hidden="true"></span>
       </button>
     </header>
@@ -113,7 +117,7 @@ const isActive = (href: string) => {
     <footer class="site-footer">
       <p>{SITE.footerText}</p>
       <div class="footer-links">
-        <a href={withBase('/blog/')}>Notes</a>
+        <a href={withBase('/blog/')}>{t('footer.notes')}</a>
         <a href="https://almanac.p4ni.com" target="_blank" rel="noopener noreferrer">Almanac ↗</a>
       </div>
       <SocialLinks />

@@ -4,6 +4,7 @@
 // `currentColor`, so they follow the light/dark palettes automatically.
 import { SOCIAL_LINKS, type SocialIcon } from '../consts';
 import { withBase } from '../lib/url';
+import { t } from '../i18n';
 
 const ICONS: Record<SocialIcon, string> = {
   github:
@@ -21,7 +22,7 @@ const isInternal = (href: string) => href.startsWith('/');
 
 {
   SOCIAL_LINKS.length > 0 && (
-    <ul class="social-links" aria-label="Social links">
+    <ul class="social-links" aria-label={t('social.label')}>
       {SOCIAL_LINKS.map((link) => (
         <li>
           <a

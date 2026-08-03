@@ -1,10 +1,16 @@
 ---
+// The prose on this page is placeholder copy — rewrite it as your own. It is
+// intentionally *not* in `src/i18n/`: the dictionary holds UI chrome, so a
+// translator isn't handed someone else's biography, and you don't have to open
+// a dictionary file to edit your own about page.
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../consts';
+import { t } from '../../i18n';
 ---
 
-<BaseLayout title="About" description="About the author behind this Astro Keel site.">
+<BaseLayout title={t('about.title')} description={`About the author behind this ${SITE.title} site.`}>
   <section class="page-head section">
-    <p class="eyebrow">About</p>
+    <p class="eyebrow">{t('about.eyebrow')}</p>
     <h1>A measured profile for the person behind the work.</h1>
     <p class="lead">
       This page is shaped for a concise biography, a working philosophy, and the handful
@@ -31,7 +37,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="section" aria-label="Experience summary">
+  <section class="section" aria-label={t('about.ledgerLabel')}>
     <div class="about-ledger">
       <article>
         <span>01</span>

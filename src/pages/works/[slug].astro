@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { withBase } from '../../lib/url';
+import { formatDate, t } from '../../i18n';
 
 export async function getStaticPaths() {
   const entries = await getCollection('works');
@@ -11,13 +12,6 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat('en', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(date);
 ---
 
 <BaseLayout
@@ -28,7 +22,7 @@ const formatDate = (date: Date) =>
 >
   <article data-pagefind-body>
     <header class="page-head section article-head">
-      <p class="eyebrow">Work</p>
+      <p class="eyebrow">{t('work.eyebrow')}</p>
       <h1>{entry.data.title}</h1>
       <p class="lead">{entry.data.description}</p>
       <div class="entry-meta">
@@ -36,8 +30,8 @@ const formatDate = (date: Date) =>
         <span>{entry.data.tech.join(' / ')}</span>
       </div>
       <div class="action-row">
-        {entry.data.link && <a class="button" href={entry.data.link}>Visit project</a>}
-        {entry.data.repo && <a class="text-link" href={entry.data.repo}>View repository</a>}
+        {entry.data.link && <a class="button" href={entry.data.link}>{t('work.visit')}</a>}
+        {entry.data.repo && <a class="text-link" href={entry.data.repo}>{t('work.repository')}</a>}
       </div>
       {
         entry.data.thumbnail && (
@@ -54,7 +48,7 @@ const formatDate = (date: Date) =>
 
     <div class="section article-layout">
       <aside class="article-toc">
-        <p class="eyebrow">Stack</p>
+        <p class="eyebrow">{t('work.stackEyebrow')}</p>
         <ul class="tech-list">
           {entry.data.tech.map((item) => <li>{item}</li>)}
         </ul>
