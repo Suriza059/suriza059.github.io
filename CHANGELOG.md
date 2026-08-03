@@ -36,6 +36,12 @@ written with that in mind — each one names the files it touches.
 - Sticky top bar on scroll.
 - Community health files — issue forms, a pull request template,
   `CONTRIBUTING.md`, and this changelog.
+- **Optional Giscus comments** on blog posts, configured through `GISCUS` in
+  `src/consts.ts` and **off by default** — a disabled build emits no Giscus
+  markup, styles, or script at all. When enabled, the widget loads only once the
+  reader scrolls near it, follows the light/dark toggle live, and falls back to
+  a GitHub Discussions link if the embed never appears
+  (`src/components/Comments.astro`).
 - Default Open Graph image (`public/og.jpg`), work thumbnails, and a hero image
   for the sample posts.
 
