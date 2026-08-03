@@ -56,10 +56,18 @@ written with that in mind — each one names the files it touches.
 
 - **`minutesRead` is now a number**, not a preformatted `"3 min read"` string.
   `reading-time`'s own text is hard-coded English and would have survived every
-  `SITE.locale` change; templates render it through `t('post.readingTime')`
-  instead. If you read `remarkPluginFrontmatter.minutesRead` in a template of
-  your own, wrap it the same way. Incremental builds cache the old value —
-  delete `.astro/` once after upgrading.
+  `SITE.locale` change; templates render it through the `readingTime()` helper
+  in `src/i18n/` instead. If you read `remarkPluginFrontmatter.minutesRead` in a
+  template of your own, route it through that helper too — it tolerates either
+  shape.
+
+  The Content Layer keeps rendered frontmatter in
+  `node_modules/.astro/data-store.json`, and changing a remark plugin does not
+  invalidate it, so the first build after upgrading may still serve the old
+  value. Delete `node_modules/.astro/` once — clearing the repo-root `.astro/`
+  is *not* enough, it only holds generated types. The helper degrades
+  gracefully in the meantime (you would otherwise see `3 min read min read`
+  after upgrading, or a bare `3` after downgrading).
 - Site identity (title, description, RSS description, share image, author,
   footer text, nav items) is centralized in `src/consts.ts`.
 - README rewritten: badge header, light/dark preview screenshots, and expanded
