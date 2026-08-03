@@ -6,12 +6,13 @@
 <script>
   const IDLE_LABEL = 'Copy';
 
-  // `astro:page-load` fires on the initial load and after every soft
-  // navigation; the swap brings in fresh, button-less `pre` elements.
-  document.addEventListener('astro:page-load', () => {
+  // Runs right away (not on `astro:page-load`, which waits for window `load`)
+  // and again after each view-transition swap brings in fresh `pre` elements.
+  const enhance = () => {
     for (const pre of document.querySelectorAll('pre')) {
       const code = pre.querySelector('code');
       if (!(code instanceof HTMLElement)) continue;
+      if (pre.parentElement?.classList.contains('code-block')) continue;
 
       const wrapper = document.createElement('div');
       wrapper.className = 'code-block';
@@ -39,5 +40,8 @@
       });
       wrapper.appendChild(button);
     }
-  });
+  };
+
+  enhance();
+  document.addEventListener('astro:after-swap', enhance);
 </script>
