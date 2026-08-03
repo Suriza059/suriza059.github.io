@@ -59,6 +59,7 @@ A calm neutral base, a single configurable accent color, generous whitespace, an
 - **Static search** — zero-backend full-text search at `/search` powered by [Pagefind](https://pagefind.app/), indexed at build time.
 - **Auto OG images** — per-post and per-work Open Graph images rendered at build time with `satori` + `sharp`.
 - **Table of contents** — blog posts get an auto-generated sidebar TOC from their headings.
+- **Optional comments** — [Giscus](https://giscus.app) threads on blog posts, opt-in via `src/consts.ts`, lazy-loaded and theme-synced; disabled builds ship zero Giscus bytes.
 - **RSS feed** — generated at `/rss.xml` with `@astrojs/rss`.
 - **Syntax highlighting** — Shiki dual themes (light/dark) wired to the active color scheme.
 - **SEO-ready** — canonical URLs, Open Graph, Twitter cards, and a sitemap out of the box.
@@ -134,6 +135,39 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
 ```
 
 Built-in icons: `github`, `x`, `linkedin`, `rss`, `email`. Site-root paths (like `/rss.xml`) get the configured `base` applied automatically; `mailto:` and full URLs are used as-is.
+
+### Comments (optional)
+
+Blog posts can carry a [Giscus](https://giscus.app) thread — comments backed by
+GitHub Discussions, so there is still no backend to run. **Off by default:** with
+`enabled: false`, not a single byte of Giscus markup, CSS, or script reaches the
+browser — the whole component, styles included, sits behind the flag.
+
+To turn it on:
+
+1. Make the repository public and enable **Discussions** in its settings.
+2. Install the [giscus GitHub App](https://github.com/apps/giscus) on it.
+3. Fill in the generated values from [giscus.app](https://giscus.app) in
+   `src/consts.ts`:
+
+```ts
+export const GISCUS: GiscusConfig = {
+  enabled: true,
+  repo: '<user>/<repo>',
+  repoId: 'R_...',        // from giscus.app
+  category: 'Announcements',
+  categoryId: 'DIC_...',  // from giscus.app
+  mapping: 'pathname',    // survives retitling, unlike 'title'
+  // ...
+};
+```
+
+The widget loads only when the reader scrolls near it (`IntersectionObserver`),
+so it never competes with the article for bandwidth, and its theme follows the
+header's light/dark toggle live — set `lightTheme` / `darkTheme` to any Giscus
+theme name or a URL to your own theme CSS. If the embed never appears — a
+content blocker, an offline reader, or an unfinished repository setup — a link
+to the discussion thread replaces it rather than leaving an empty box.
 
 ### Site URL
 
