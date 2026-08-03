@@ -697,6 +697,25 @@ pre code {
   text-transform: uppercase;
 }
 
+/* Giscus comments (opt-in via GISCUS in src/consts.ts). The widget is an
+   iframe, so the theme only owns the frame around it. */
+.comments-mount {
+  max-width: var(--prose-width);
+  margin-top: calc(var(--baseline) * 0.85);
+  border-top: var(--hairline);
+  padding-top: calc(var(--baseline) * 0.85);
+  /* Reserve room so the lazily loaded thread doesn't shift the footer. */
+  min-height: 12rem;
+}
+
+.comments-fallback {
+  margin: 0;
+  border: var(--hairline);
+  padding: 1rem 1.25rem;
+  color: var(--color-muted);
+  background: var(--color-surface);
+}
+
 .article-toc nav {
   flex-direction: column;
   align-items: flex-start;
