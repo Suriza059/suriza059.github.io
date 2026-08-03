@@ -4,7 +4,7 @@
 //
 // To add a locale: copy `ja.ts`, translate the values, and register it in
 // `DICTIONARIES` below. Nothing else needs editing.
-import { SITE } from '../consts';
+import { SITE, type NavItem } from '../consts';
 import { en, type UIKey, type UIStrings } from './en';
 import { ja } from './ja';
 
@@ -49,7 +49,7 @@ export const formatDate = (date: Date, style: 'long' | 'short' = 'long'): string
     year: 'numeric',
   }).format(date);
 
-/** Resolve a nav entry's label: a literal `label` wins, otherwise the
- *  dictionary key. See `NAV_ITEMS` in `src/consts.ts`. */
-export const navLabel = (item: { label?: string; labelKey?: UIKey }): string =>
-  item.label ?? (item.labelKey ? t(item.labelKey) : '');
+/** Resolve a nav entry's label. `NavItem` requires exactly one of `label` or
+ *  `labelKey`, so there is no unlabelled case to fall back from. */
+export const navLabel = (item: NavItem): string =>
+  item.label !== undefined ? item.label : t(item.labelKey);
