@@ -9,17 +9,36 @@ export async function getStaticPaths() {
   const entries = (await getCollection('blog', ({ data }) => !data.draft)).sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
-  return entries.map((entry, index) => ({
-    params: { slug: entry.id },
-    props: {
-      entry,
-      newer: entries[index - 1] ?? null,
-      older: entries[index + 1] ?? null,
-    },
-  }));
+  return entries.map((entry, index) => {
+    // Up to 3 posts ranked by shared tags; ties resolved by newest publish date.
+    const related = entries
+      .filter((other) => other.id !== entry.id)
+      .map((other) => ({
+        post: other,
+        shared: other.data.tags.filter((tag) => entry.data.tags.includes(tag)).length,
+      }))
+      .filter(({ shared }) => shared > 0)
+      .sort(
+        (a, b) =>
+          b.shared - a.shared ||
+          b.post.data.publishDate.valueOf() - a.post.data.publishDate.valueOf(),
+      )
+      .slice(0, 3)
+      .map(({ post }) => post);
+
+    return {
+      params: { slug: entry.id },
+      props: {
+        entry,
+        newer: entries[index - 1] ?? null,
+        older: entries[index + 1] ?? null,
+        related,
+      },
+    };
+  });
 }
 
-const { entry, newer, older } = Astro.props;
+const { entry, newer, older, related } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 
 const formatDate = (date: Date) =>
@@ -98,6 +117,26 @@ const formatDate = (date: Date) =>
           )}
         </div>
       </nav>
+    )
+  }
+
+  {
+    related.length > 0 && (
+      <aside class="section post-nav-section" aria-labelledby="related-heading">
+        <p class="eyebrow" id="related-heading">
+          Related
+        </p>
+        <ul class="related-list">
+          {related.map((post) => (
+            <li>
+              <a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a>
+              <time datetime={post.data.publishDate.toISOString()}>
+                {formatDate(post.data.publishDate)}
+              </time>
+            </li>
+          ))}
+        </ul>
+      </aside>
     )
   }
 </BaseLayout>
