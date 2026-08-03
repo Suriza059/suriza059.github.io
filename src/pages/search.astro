@@ -22,10 +22,11 @@ const bundlePath = withBase('/pagefind/');
         preview the site to try it — it is not available on the dev server.
       </p>
     </div>
-    <script is:inline define:vars={{ bundlePath }}>
-      const script = document.createElement('script');
-      script.src = `${bundlePath}pagefind-ui.js`;
-      script.onload = () => {
+    <script is:inline data-astro-rerun define:vars={{ bundlePath }}>
+      // `data-astro-rerun` re-runs this after each soft navigation, because the
+      // swap replaces `#search` with an empty container. The UI script itself is
+      // only loaded once and reused on later visits.
+      const initSearch = () => {
         document.querySelector('#search .search-fallback')?.remove();
         new PagefindUI({
           element: '#search',
@@ -35,7 +36,14 @@ const bundlePath = withBase('/pagefind/');
           autofocus: true,
         });
       };
-      document.head.append(script);
+      if (window.PagefindUI) {
+        initSearch();
+      } else {
+        const script = document.createElement('script');
+        script.src = `${bundlePath}pagefind-ui.js`;
+        script.onload = initSearch;
+        document.head.append(script);
+      }
     </script>
   </section>
 </BaseLayout>
