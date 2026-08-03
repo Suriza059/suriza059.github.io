@@ -8,6 +8,7 @@ import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
 import { withBase } from '../lib/url';
 import { SITE, NAV_ITEMS } from '../consts';
+import CodeCopy from '../components/CodeCopy.astro';
 
 interface Props {
   title?: string;
@@ -101,6 +102,8 @@ const isActive = (href: string) => {
       <a href={withBase('/blog/')}>Notes</a>
       <a href="https://almanac.p4ni.com" target="_blank" rel="noopener noreferrer">Almanac ↗</a>
     </footer>
+
+    <CodeCopy />
 
     <script>
       const toggle = document.querySelector('[data-theme-toggle]');
