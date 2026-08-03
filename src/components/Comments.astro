@@ -1,0 +1,109 @@
+---
+// Giscus comments — opt-in. Everything below (markup *and* script) sits behind
+// the `enabled` check, so a default build ships zero Giscus bytes.
+import { GISCUS } from '../consts';
+
+// Guard on the IDs too: a half-filled config would render a widget that can
+// never resolve a discussion.
+const enabled = Boolean(GISCUS.enabled && GISCUS.repo && GISCUS.repoId && GISCUS.categoryId);
+---
+
+{
+  enabled && (
+    <section class="section post-nav-section comments-section" aria-labelledby="comments-heading" data-pagefind-ignore>
+      <p class="eyebrow" id="comments-heading">
+        Comments
+      </p>
+      <div
+        class="comments-mount"
+        data-giscus
+        data-repo={GISCUS.repo}
+        data-repo-id={GISCUS.repoId}
+        data-category={GISCUS.category}
+        data-category-id={GISCUS.categoryId}
+        data-mapping={GISCUS.mapping}
+        data-strict={GISCUS.strict ? '1' : '0'}
+        data-reactions-enabled={GISCUS.reactionsEnabled ? '1' : '0'}
+        data-input-position={GISCUS.inputPosition}
+        data-lang={GISCUS.lang}
+        data-light-theme={GISCUS.lightTheme}
+        data-dark-theme={GISCUS.darkTheme}
+      >
+        <noscript>
+          <p class="comments-fallback">Comments require JavaScript. They are hosted on GitHub Discussions.</p>
+        </noscript>
+      </div>
+
+      <script is:inline data-astro-rerun>
+        // `is:inline` keeps this out of the shared bundle so a disabled config
+        // emits nothing at all. `data-astro-rerun` re-runs it after each soft
+        // navigation, since the swap replaces the mount with an empty one.
+        // Config arrives through data attributes — `define:vars` would strip
+        // `data-astro-rerun` from the rendered tag. IIFE so re-runs can't
+        // redeclare top-level consts.
+        (() => {
+          const mount = document.querySelector('[data-giscus]');
+          if (!mount || mount.dataset.loaded) return;
+
+          const config = mount.dataset;
+          const themeFor = (scheme) => (scheme === 'dark' ? config.darkTheme : config.lightTheme);
+
+          const load = () => {
+            if (mount.dataset.loaded) return;
+            mount.dataset.loaded = '1';
+            const script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.async = true;
+            script.crossOrigin = 'anonymous';
+            script.setAttribute('data-repo', config.repo);
+            script.setAttribute('data-repo-id', config.repoId);
+            script.setAttribute('data-category', config.category);
+            script.setAttribute('data-category-id', config.categoryId);
+            script.setAttribute('data-mapping', config.mapping);
+            script.setAttribute('data-strict', config.strict);
+            script.setAttribute('data-reactions-enabled', config.reactionsEnabled);
+            script.setAttribute('data-emit-metadata', '0');
+            script.setAttribute('data-input-position', config.inputPosition);
+            script.setAttribute('data-lang', config.lang);
+            script.setAttribute('data-loading', 'lazy');
+            script.setAttribute('data-theme', themeFor(document.documentElement.dataset.theme));
+            mount.appendChild(script);
+          };
+
+          // Defer the third-party request until the reader is near the thread,
+          // so comments never compete with the article for bandwidth.
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(
+              (entries) => {
+                if (!entries.some((entry) => entry.isIntersecting)) return;
+                observer.disconnect();
+                load();
+              },
+              { rootMargin: '400px 0px' },
+            );
+            observer.observe(mount);
+          } else {
+            load();
+          }
+
+          // Keep the widget in sync with the header toggle. The theme lives on
+          // `<html data-theme>`, so watch that attribute rather than the button.
+          const syncTheme = () => {
+            const frame = mount.querySelector('iframe.giscus-frame');
+            if (!frame) return;
+            frame.contentWindow?.postMessage(
+              { giscus: { setConfig: { theme: themeFor(document.documentElement.dataset.theme) } } },
+              'https://giscus.app',
+            );
+          };
+          const themeObserver = new MutationObserver(syncTheme);
+          themeObserver.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme'],
+          });
+          document.addEventListener('astro:before-swap', () => themeObserver.disconnect(), { once: true });
+        })();
+      </script>
+    </section>
+  )
+}
