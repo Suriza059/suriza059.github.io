@@ -81,12 +81,19 @@ pagination, and generated OG images all switched on.
 | Works `/works/` | 100 | 100 | 100 | 100 |
 | Search `/search/` | 100 | 100 | 100 | 100 |
 
-<sub>Lighthouse 13.4.1, desktop preset, production build. Reproduce it yourself:</sub>
+<sub>Lighthouse 13.4.1, desktop preset, local production build. Reproduce it yourself:</sub>
 
 ```sh
 npm run build && npm run preview
 npx lighthouse http://localhost:4321/astro-keel/ --preset=desktop --view
 ```
+
+Measured locally on purpose. First Contentful Paint, Largest Contentful Paint,
+Total Blocking Time, and Cumulative Layout Shift are perfect against the hosted
+demo too, but Speed Index swings with network conditions — repeated runs against
+GitHub Pages land anywhere from 0.3 s to 1.9 s, which is enough to move the
+Performance score between 97 and 100. A local build measures the theme rather
+than the hop to the CDN.
 
 ## Tech stack
 
