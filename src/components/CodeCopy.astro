@@ -6,34 +6,38 @@
 <script>
   const IDLE_LABEL = 'Copy';
 
-  for (const pre of document.querySelectorAll('pre')) {
-    const code = pre.querySelector('code');
-    if (!(code instanceof HTMLElement)) continue;
+  // `astro:page-load` fires on the initial load and after every soft
+  // navigation; the swap brings in fresh, button-less `pre` elements.
+  document.addEventListener('astro:page-load', () => {
+    for (const pre of document.querySelectorAll('pre')) {
+      const code = pre.querySelector('code');
+      if (!(code instanceof HTMLElement)) continue;
 
-    const wrapper = document.createElement('div');
-    wrapper.className = 'code-block';
-    pre.replaceWith(wrapper);
-    wrapper.appendChild(pre);
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.replaceWith(wrapper);
+      wrapper.appendChild(pre);
 
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'code-copy';
-    button.textContent = IDLE_LABEL;
-    button.setAttribute('aria-label', 'Copy code to clipboard');
-    button.setAttribute('data-pagefind-ignore', '');
-    button.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(code.innerText.replace(/\n$/, ''));
-      } catch {
-        return;
-      }
-      button.textContent = 'Copied';
-      button.classList.add('is-copied');
-      window.setTimeout(() => {
-        button.textContent = IDLE_LABEL;
-        button.classList.remove('is-copied');
-      }, 1600);
-    });
-    wrapper.appendChild(button);
-  }
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-copy';
+      button.textContent = IDLE_LABEL;
+      button.setAttribute('aria-label', 'Copy code to clipboard');
+      button.setAttribute('data-pagefind-ignore', '');
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(code.innerText.replace(/\n$/, ''));
+        } catch {
+          return;
+        }
+        button.textContent = 'Copied';
+        button.classList.add('is-copied');
+        window.setTimeout(() => {
+          button.textContent = IDLE_LABEL;
+          button.classList.remove('is-copied');
+        }, 1600);
+      });
+      wrapper.appendChild(button);
+    }
+  });
 </script>
