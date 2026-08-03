@@ -2,6 +2,7 @@
 // Giscus comments — opt-in. Everything below (markup, styles, *and* script)
 // sits behind the `enabled` check, so a default build ships zero Giscus bytes.
 import { GISCUS } from '../consts';
+import { t } from '../i18n';
 
 // Guard on the IDs too: a half-filled config would render a widget that can
 // never resolve a discussion.
@@ -15,7 +16,7 @@ const discussionsUrl = `https://github.com/${GISCUS.repo}/discussions`;
   enabled && (
     <section class="section post-nav-section comments-section" aria-labelledby="comments-heading" data-pagefind-ignore>
       <p class="eyebrow" id="comments-heading">
-        Comments
+        {t('comments.eyebrow')}
       </p>
       <div
         class="comments-mount"
@@ -36,15 +37,9 @@ const discussionsUrl = `https://github.com/${GISCUS.repo}/discussions`;
             reader, or a repository whose Giscus setup is unfinished. Without
             it, the reader is left staring at a labelled but permanently empty
             box with no explanation. */}
-        <p class="comments-fallback" data-giscus-fallback hidden>
-          Comments could not be loaded. Read the thread on{' '}
-          <a href={discussionsUrl} target="_blank" rel="noopener noreferrer">
-            GitHub Discussions ↗
-          </a>
-          .
-        </p>
+        <p class="comments-fallback" data-giscus-fallback hidden set:html={t('comments.failed', { url: discussionsUrl })} />
         <noscript>
-          <p class="comments-fallback">Comments require JavaScript. They are hosted on GitHub Discussions.</p>
+          <p class="comments-fallback">{t('comments.noscript')}</p>
         </noscript>
       </div>
 

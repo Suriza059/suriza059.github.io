@@ -63,6 +63,8 @@ const isActive = (href: string) => {
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
+    <!-- Open Graph wants `ja_JP`, not the `ja-JP` of `<html lang>`. -->
+    <meta property="og:locale" content={locale.replace('-', '_')} />
     {imageURL && <meta property="og:image" content={imageURL} />}
 
     <!-- Twitter -->
