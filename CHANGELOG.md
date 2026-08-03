@@ -36,6 +36,13 @@ written with that in mind — each one names the files it touches.
 - Sticky top bar on scroll.
 - Community health files — issue forms, a pull request template,
   `CONTRIBUTING.md`, and this changelog.
+- **Localizable UI strings.** Every string the theme itself renders now comes
+  from a typed dictionary in `src/i18n/`, selected by a new `SITE.locale`.
+  One line also drives `<html lang>`, `og:locale`, `Intl` date formatting, and
+  the RSS `<language>` element. `en` and `ja` ship with the theme; the
+  dictionary covers UI chrome only, so the placeholder prose on the home and
+  about pages stays in those `.astro` files. Nav entries take a `labelKey`
+  (dictionary) or a literal `label`, and the type requires exactly one.
 - **Optional Giscus comments** on blog posts, configured through `GISCUS` in
   `src/consts.ts` and **off by default** — a disabled build emits no Giscus
   markup, styles, or script at all. When enabled, the widget loads only once the
@@ -47,6 +54,12 @@ written with that in mind — each one names the files it touches.
 
 ### Changed
 
+- **`minutesRead` is now a number**, not a preformatted `"3 min read"` string.
+  `reading-time`'s own text is hard-coded English and would have survived every
+  `SITE.locale` change; templates render it through `t('post.readingTime')`
+  instead. If you read `remarkPluginFrontmatter.minutesRead` in a template of
+  your own, wrap it the same way. Incremental builds cache the old value —
+  delete `.astro/` once after upgrading.
 - Site identity (title, description, RSS description, share image, author,
   footer text, nav items) is centralized in `src/consts.ts`.
 - README rewritten: badge header, light/dark preview screenshots, and expanded
