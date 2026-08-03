@@ -34,6 +34,8 @@ written with that in mind — each one names the files it touches.
   (`src/components/SocialLinks.astro`).
 - **Custom 404 page** (`src/pages/404.astro`).
 - Sticky top bar on scroll.
+- Community health files — issue forms, a pull request template,
+  `CONTRIBUTING.md`, and this changelog.
 - Default Open Graph image (`public/og.jpg`), work thumbnails, and a hero image
   for the sample posts.
 
@@ -53,6 +55,10 @@ written with that in mind — each one names the files it touches.
 - Section padding no longer showed the divider background behind the works list
   and the about ledger.
 - Hero heading size capped so the call to action stays above the fold.
+- Filled `.button` text now uses a per-scheme `--color-on-accent` token. The
+  dark-scheme accent is light, so near-white label text only reached a 2.53:1
+  contrast ratio; the dark demo page now passes WCAG AA and Lighthouse
+  accessibility scores 100.
 
 ## [0.1.0] - 2026-06-27
 
