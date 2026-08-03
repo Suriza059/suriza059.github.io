@@ -26,7 +26,7 @@ const readingTimes = new Map(
   await Promise.all(
     posts.map(async (post) => {
       const { remarkPluginFrontmatter } = await render(post);
-      return [post.id, remarkPluginFrontmatter.minutesRead as string] as const;
+      return [post.id, remarkPluginFrontmatter.minutesRead as number] as const;
     }),
   ),
 );
@@ -35,11 +35,14 @@ const pageTitle =
   page.currentPage === 1 ? t('blog.title') : t('blog.titlePaged', { page: page.currentPage });
 ---
 
-<BaseLayout title={pageTitle} description={t('blog.description', { site: SITE.title })}>
+<BaseLayout title={pageTitle} description={`Notes and writing — ${SITE.title}, a minimal portfolio and blog theme for Astro.`}>
   <section class="page-head section">
     <p class="eyebrow">{t('blog.eyebrow')}</p>
-    <h1>{t('blog.heading')}</h1>
-    <p class="lead">{t('blog.lead')}</p>
+    <h1>Notes, essays, and release logs.</h1>
+    <p class="lead">
+      The blog collection supports tags, descriptions, draft filtering, publish dates,
+      and optional hero images.
+    </p>
   </section>
 
   <section class="section content-index" aria-label={t('blog.listLabel')}>
@@ -57,7 +60,7 @@ const pageTitle =
             <article class="entry-card">
               <div class="entry-meta">
                 <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate, 'short')}</time>
-                <span>{readingTimes.get(post.id)}</span>
+                <span>{t('post.readingTime', { minutes: readingTimes.get(post.id) ?? 1 })}</span>
                 <span>{post.data.tags.join(' / ')}</span>
               </div>
               <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>

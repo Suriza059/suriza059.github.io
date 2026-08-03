@@ -29,7 +29,7 @@ const readingTimes = new Map(
   await Promise.all(
     taggedPosts.map(async (post) => {
       const { remarkPluginFrontmatter } = await render(post);
-      return [post.id, remarkPluginFrontmatter.minutesRead as string] as const;
+      return [post.id, remarkPluginFrontmatter.minutesRead as number] as const;
     }),
   ),
 );
@@ -63,7 +63,7 @@ const pageTitle =
             <article class="entry-card">
               <div class="entry-meta">
                 <time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate, 'short')}</time>
-                <span>{readingTimes.get(post.id)}</span>
+                <span>{t('post.readingTime', { minutes: readingTimes.get(post.id) ?? 1 })}</span>
                 <span>{post.data.tags.join(' / ')}</span>
               </div>
               <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>
