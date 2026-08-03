@@ -5,6 +5,7 @@ import { createRequire } from 'node:module';
 import satori from 'satori';
 import sharp from 'sharp';
 import { SITE } from '../../../consts';
+import { t } from '../../../i18n';
 
 // Build-time generated Open Graph images for every blog post and work entry,
 // rendered in the theme's light palette (see global.css tokens). The static
@@ -25,7 +26,7 @@ export const getStaticPaths = (async () => {
       props: {
         title: entry.data.title,
         description: entry.data.description,
-        kind: 'Blog',
+        kind: t('og.blog'),
       } satisfies OgProps,
     })),
     ...works.map((entry) => ({
@@ -33,7 +34,7 @@ export const getStaticPaths = (async () => {
       props: {
         title: entry.data.title,
         description: entry.data.description,
-        kind: 'Work',
+        kind: t('og.work'),
       } satisfies OgProps,
     })),
   ];
@@ -52,6 +53,11 @@ const COLOR = {
 const require = createRequire(import.meta.url);
 const font = (pkgPath: string) => readFile(require.resolve(pkgPath));
 
+// Latin subsets, to keep the build light. Satori draws any glyph these fonts
+// lack as an empty box, so a site writing in a non-Latin script — including a
+// `SITE.locale` like `ja` — must swap in a face that covers it (install e.g.
+// `@fontsource/noto-sans-jp` and point the paths below at it). Post titles are
+// affected the same way, independently of the locale setting.
 const [fraunces, publicSans] = await Promise.all([
   font('@fontsource/fraunces/files/fraunces-latin-600-normal.woff'),
   font('@fontsource/public-sans/files/public-sans-latin-400-normal.woff'),
