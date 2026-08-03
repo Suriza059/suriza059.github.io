@@ -6,6 +6,7 @@ const bundlePath = withBase('/pagefind/');
 ---
 
 <BaseLayout title="Search" description="Search posts and works — Astro Keel.">
+  <link slot="head" rel="stylesheet" href={`${bundlePath}pagefind-ui.css`} />
   <section class="page-head section">
     <p class="eyebrow">Search</p>
     <h1>Find posts and works.</h1>
@@ -15,27 +16,41 @@ const bundlePath = withBase('/pagefind/');
   </section>
 
   <section class="section search-section" aria-label="Site search">
-    <link rel="stylesheet" href={`${bundlePath}pagefind-ui.css`} />
-    <div id="search">
+    <div id="search" data-bundle-path={bundlePath}>
       <p class="search-fallback">
         The search index is generated at build time. Run <code>npm run build</code> and
         preview the site to try it — it is not available on the dev server.
       </p>
     </div>
-    <script is:inline define:vars={{ bundlePath }}>
-      const script = document.createElement('script');
-      script.src = `${bundlePath}pagefind-ui.js`;
-      script.onload = () => {
-        document.querySelector('#search .search-fallback')?.remove();
-        new PagefindUI({
-          element: '#search',
-          bundlePath,
-          showImages: false,
-          showSubResults: true,
-          autofocus: true,
-        });
-      };
-      document.head.append(script);
+    <script is:inline data-astro-rerun>
+      // `data-astro-rerun` re-runs this after each soft navigation, because the
+      // swap replaces `#search` with an empty container. `bundlePath` comes from
+      // a data attribute — `define:vars` would strip `data-astro-rerun` from the
+      // rendered tag. The IIFE keeps re-runs from redeclaring top-level consts;
+      // the UI script itself is only loaded once and reused on later visits.
+      (() => {
+        const container = document.getElementById('search');
+        if (!container) return;
+        const bundlePath = container.dataset.bundlePath;
+        const initSearch = () => {
+          container.querySelector('.search-fallback')?.remove();
+          new PagefindUI({
+            element: '#search',
+            bundlePath,
+            showImages: false,
+            showSubResults: true,
+            autofocus: true,
+          });
+        };
+        if (window.PagefindUI) {
+          initSearch();
+        } else {
+          const script = document.createElement('script');
+          script.src = `${bundlePath}pagefind-ui.js`;
+          script.onload = initSearch;
+          document.head.append(script);
+        }
+      })();
     </script>
   </section>
 </BaseLayout>
