@@ -17,9 +17,9 @@ follow from that:
 
 ## Development setup
 
-Requires **Node.js 22.12 or newer** (Astro 7). The exact version CI uses lives in
-`.nvmrc`, so a version manager can pick it up for you — `nvm use`, `fnm use`, or
-`mise install` in the project root.
+Requires **Node.js 22.12 or newer** (Astro 7). The release line CI builds on
+lives in `.nvmrc`, so a version manager can pick it up for you — `nvm use`,
+`fnm use`, or `mise install` in the project root.
 
 ```sh
 git clone https://github.com/kpab/astro-keel.git
