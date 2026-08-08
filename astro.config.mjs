@@ -13,7 +13,7 @@ export default defineConfig({
   // or a `<user>.github.io` root site.
   // add new username.
   site: 'https://suriza059.github.io',
-  base: '/astro-keel',
+  base: '/',
   integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
