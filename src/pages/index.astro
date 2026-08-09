@@ -44,30 +44,31 @@ const websiteSchema = {
 </section>
 
   <section class="section split-overview" aria-label="Sobre mí">
-  <div>
+  <div class="video-frame">
     <p class="eyebrow">About me</p>
-    <video
-      controls
-      width="100%"
-      poster={withBase('/video-poster.jpg')}
-    >
-      <source src={withBase('/mi-video.mp4')} type="video/mp4" />
-      Tu navegador no soporta el elemento de video.
-    </video>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/TU_VIDEO_ID"
+        title="Video de presentación"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
   <div class="feature-list">
     <article>
-      <h3>Quién soy</h3>
-      <p>Estudiante de la Universidad El Bosque, apasionada por el desarrollo de software y el análisis de datos.</p>
+      <h3>Quién soy</h3>Estudiante de la Universidad El Bosque, 
+      apasionada por el desarrollo de software y la ingenieria de sistemas.</p>
     </article>
     <article>
       <h3>Qué hago</h3>
-      <p>Estudió y me esfuerzo cada dia para poder superarme a mi misma.</p>
+      <p>Estudio y me esfuerzo cada dia para poder superarme a mi misma.</p>
     </article>
     <article>
       <h3>Qué busco</h3>
-      <p>Seguir creciendo como ingeniera, aplicando lo aprendido en proyectos reales y en mi vida diaria poder desarrollar la tecnologia
-      para ayudar al otro.</p>
+      <p>Busco seguir creciendo como ingeniera, aplicando lo aprendido en proyectos reales y 
+      en mi vida diaria poder desarrollar la tecnologia para ayudar al otro.</p>
     </article>
   </div>
 </section>

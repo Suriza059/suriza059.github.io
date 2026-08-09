@@ -105,8 +105,6 @@ export type NavItem =
  *  `label` instead — one of the two is required. */
 export const NAV_ITEMS: readonly NavItem[] = [
   { href: '/', labelKey: 'nav.home' },
-  { href: '/modelado/', labelKey: 'nav.modelado' },
-  { href: '/normalizacion/', labelKey: 'nav.normalizacion' },
-  { href: '/SQL/', labelKey: 'nav.SQL' },
-  { href: '/proyecto/', labelKey: 'nav.proyecto' },
+  { href: '/blog/', label: 'Aprendizaje' },
+  { href: '/works/', label: 'Evidencias' },
 ];
