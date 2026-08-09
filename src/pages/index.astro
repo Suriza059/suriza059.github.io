@@ -32,38 +32,44 @@ const websiteSchema = {
 <BaseLayout description={SITE.description}>
   <StructuredData slot="head" schema={websiteSchema} />
   <section class="hero section">
-    <p class="eyebrow">Portfolio / writing / systems notes</p>
-    <h1>Structural minimalism for careful digital work.</h1>
-    <p class="lead">
-      Astro Keel gives projects, essays, and professional notes a disciplined frame: editorial type,
-      measured rhythm, and a single accent carried through fine structural rules.
-    </p>
-    <div class="action-row" aria-label={t('home.primaryLinks')}>
-      <a class="button" href={withBase('/works/')}>{t('home.viewWorks')}</a>
-      <a class="text-link" href={withBase('/blog/')}>{t('home.readNotes')}</a>
-    </div>
-  </section>
+  <p class="eyebrow">Portfolio / writing / systems notes</p>
+  <h1>La formacion de una ingeniera.</h1>
+  <p class="lead">
+    Soy Susan, estudiante de la Universidad El Bosque. En este portafolio encontraras diversas actividades que me ayudaran a enriquecer mis conocimientos.
+  </p>
+  <div class="action-row" aria-label={t('home.primaryLinks')}>
+    <a class="button" href={withBase('/works/')}>{t('home.viewWorks')}</a>
+    <a class="text-link" href={withBase('/blog/')}>{t('home.readNotes')}</a>
+  </div>
+</section>
 
-  <section class="section split-overview" aria-label={t('home.overviewLabel')}>
-    <div>
-      <p class="eyebrow">Principles</p>
-      <h2>Readable first, decorative last.</h2>
-    </div>
-    <div class="feature-list">
-      <article>
-        <h3>Baseline rhythm</h3>
-        <p>Vertical spacing follows a steady cadence for long-form reading.</p>
-      </article>
-      <article>
-        <h3>Typed content</h3>
-        <p>Collections are prepared for project case studies and durable notes.</p>
-      </article>
-      <article>
-        <h3>Keel lines</h3>
-        <p>Fine rules create structure without relying on decorative effects.</p>
-      </article>
-    </div>
-  </section>
+  <section class="section split-overview" aria-label="Sobre mí">
+  <div>
+    <p class="eyebrow">About me</p>
+    <video
+      controls
+      width="100%"
+      poster={withBase('/video-poster.jpg')}
+    >
+      <source src={withBase('/mi-video.mp4')} type="video/mp4" />
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </div>
+  <div class="feature-list">
+    <article>
+      <h3>Quién soy</h3>
+      <p>Estudiante de la Universidad El Bosque, apasionada por el desarrollo de software y el análisis de datos.</p>
+    </article>
+    <article>
+      <h3>Qué hago</h3>
+      <p>Trabajo en proyectos de física, bioestadística y desarrollo full-stack con Angular y Spring Boot.</p>
+    </article>
+    <article>
+      <h3>Qué busco</h3>
+      <p>Seguir creciendo como ingeniera, aplicando lo aprendido en proyectos reales y colaborativos.</p>
+    </article>
+  </div>
+</section>
 
   <section class="section index-feed" aria-labelledby="latest-works">
     <div class="section-heading">
