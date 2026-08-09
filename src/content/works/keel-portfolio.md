@@ -1,6 +1,6 @@
 ---
-title: 'Keel Portfolio System'
-description: 'A lean portfolio structure for project studies, writing, and durable personal documentation.'
+title: 'Modelado'
+description: 'Puedes indagar mas acerca de lo trabajado en esta sección.'
 thumbnail: ./keel-portfolio.jpg
 tech:
   - Astro
