@@ -74,45 +74,36 @@ const websiteSchema = {
   </div>
 </section>
 
-  <section class="section index-feed" aria-labelledby="Mis hobbies">
-    <div class="section-heading">
-      <p class="Hobbies">{t('home.misHobbies')}</p>
-      <h2 id="mis-hobbies">Pasatiempos.</h2>
-      <a class="text-link" href={withBase('/works/')}>{t('home.allWorks')}</a>
-    </div>
+  <section class="section index-feed" aria-labelledby="mis-hobbies">
+  <div class="section-heading">
+    <p class="eyebrow">Fuera del código</p>
+    <h2 id="mis-hobbies">Pasatiempos.</h2>
+  </div>
 
-    {
-      works.length > 0 ? (
-        <div class="highlight-grid">
-          {works.map((work) => (
-            <article class="highlight-card">
-              {work.data.thumbnail && (
-                <Image src={work.data.thumbnail} alt="" width={720} height={480} loading="lazy" />
-              )}
-              <div>
-                <p class="meta">{formatDate(work.data.publishDate, 'short')}</p>
-                <h3>
-                  <a href={withBase(`/works/${work.id}/`)}>{work.data.title}</a>
-                </h3>
-                <p>{work.data.description}</p>
-                {work.data.tech.length > 0 && (
-                  <ul class="tag-list" aria-label={t('home.workTech', { title: work.data.title })}>
-                    {work.data.tech.slice(0, 4).map((tech) => (
-                      <li>{tech}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      ) : (
-        <div class="empty-state compact">
-          <p set:html={t('home.worksEmpty')} />
-        </div>
-      )
-    }
-  </section>
+  <div class="highlight-grid">
+    <article class="highlight-card">
+      <img src={withBase('/hobbies/hobby1.jpg')} alt="Descripción de tu primer pasatiempo" width="720" height="480" loading="lazy" />
+      <div>
+        <h3>Nombre del pasatiempo 1</h3>
+        <p>Una pequeña descripción de qué es y por qué te gusta.</p>
+      </div>
+    </article>
+    <article class="highlight-card">
+      <img src={withBase('/hobbies/hobby2.jpg')} alt="Descripción de tu segundo pasatiempo" width="720" height="480" loading="lazy" />
+      <div>
+        <h3>Nombre del pasatiempo 2</h3>
+        <p>Una pequeña descripción de qué es y por qué te gusta.</p>
+      </div>
+    </article>
+    <article class="highlight-card">
+      <img src={withBase('/hobbies/hobby3.jpg')} alt="Descripción de tu tercer pasatiempo" width="720" height="480" loading="lazy" />
+      <div>
+        <h3>Nombre del pasatiempo 3</h3>
+        <p>Una pequeña descripción de qué es y por qué te gusta.</p>
+      </div>
+    </article>
+  </div>
+</section>
 
   <section class="section index-feed" aria-labelledby="latest-notes">
     <div class="section-heading">
