@@ -20,7 +20,8 @@ export const SITE = {
   /** Post author, emitted in JSON-LD BlogPosting structured data.
    *  Leave empty ('') to omit the author field. */
   author: 'Susan Natalia Uriza Chimachana',
-  /** Footer credit line. */,
+  /** Footer credit line. */
+  footerText: 'Built with Astro Keel.',
 } as const;
 
 /** Icons bundled with the theme — see `src/components/SocialLinks.astro`. */
