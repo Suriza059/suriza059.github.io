@@ -622,7 +622,9 @@ pre code {
 .article-image {
   display: block;
   width: 100%;
-  height: auto;
+  max-height: 420px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   margin-top: calc(var(--baseline) * 2);
   border: var(--hairline);
 }
