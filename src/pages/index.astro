@@ -31,22 +31,23 @@ const websiteSchema = {
 
 <BaseLayout description={SITE.description}>
   <StructuredData slot="head" schema={websiteSchema} />
-  <section class="hero section">
-  <p class="eyebrow">Portfolio / writing / systems notes</p>
-  <h1>La formacion de una ingeniera.</h1>
+ <section class="hero section hero-split">
+  <div>
+    <p class="eyebrow">Portfolio / writing / systems notes</p>
+    <h1>La formacion de una ingeniera.</h1>
+    <p class="lead">
+      Soy Susan, estudiante de la Universidad El Bosque. En este portafolio encontraras diversas actividades que me ayudaran a enriquecer mis conocimientos.
+    </p>
+    <div class="action-row" aria-label={t('home.primaryLinks')}>
+      <a class="button" href={withBase('/works/')}>{t('home.viewWorks')}</a>
+      <a class="text-link" href={withBase('/blog/')}>{t('home.readNotes')}</a>
+    </div>
+  </div>
   <img
     src={withBase('/profile.jpg')}
     alt="Foto de Susan"
     class="profile-photo"
   />
-  <p class="lead">
-    Soy Susan Uriza, estudiante de la Universidad El Bosque. En este portafolio encontrarás diversas actividades que me 
-ayudarán a enriquecer mis conocimientos.
-  </p>
-  <div class="action-row" aria-label={t('home.primaryLinks')}>
-    <a class="button" href={withBase('/works/')}>{t('home.viewWorks')}</a>
-    <a class="text-link" href={withBase('/blog/')}>{t('home.readNotes')}</a>
-  </div>
 </section>
   <section class="section split-overview" aria-label="Sobre mí">
   <div class="video-frame">
