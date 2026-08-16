@@ -1083,3 +1083,12 @@ pre code {
   object-fit: cover;
   display: block;
 }
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--color-accent);
+}
