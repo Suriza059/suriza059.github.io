@@ -32,6 +32,11 @@ const websiteSchema = {
 <BaseLayout description={SITE.description}>
   <StructuredData slot="head" schema={websiteSchema} />
   <section class="hero section">
+  <img
+    src={withBase('/profile.jpg')}
+    alt="Foto de Susan"
+    class="profile-photo"
+  />
   <p class="eyebrow">Portfolio / writing / systems notes</p>
   <h1>La formacion de una ingeniera.</h1>
   <p class="lead">
@@ -43,7 +48,6 @@ ayudarán a enriquecer mis conocimientos.
     <a class="text-link" href={withBase('/blog/')}>{t('home.readNotes')}</a>
   </div>
 </section>
-
   <section class="section split-overview" aria-label="Sobre mí">
   <div class="video-frame">
     <p class="eyebrow">About me</p>
