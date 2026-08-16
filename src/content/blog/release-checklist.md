@@ -1,17 +1,20 @@
 ---
-title: 'A Small Release Checklist'
+title: 'Conocimiento Modelo Entidad Relación'
 publishDate: 2026-03-18
 tags:
-  - process
-  - release
-description: 'A compact checklist for shipping a portfolio update without drama.'
+  - modelado
+  - base de datos
+description: 'Mi primer modelo entidad relación creado.'
 draft: false
+heroImage: ./entidad-relacion.jpg
 ---
 
-## Before publishing
+## ¿Qué se aprendió en clase?
 
-Check the highest-traffic pages, scan the feed, and make sure the latest project or article has the right date, tags, and description.
+° El modelo entidad relación es una estructura para organizar los datos y ver las relaciones de los datos. 
+° M E R tiene cinco elementos principales que ayudar a la mejor realización de este, como: Entidades, Atributos, Atributos Clave, Relaciones y Cardinalidades. 
 
-## After publishing
+## Ejercicio realizado
 
-Open the public URL, follow the important links, and confirm the page still works with the system color scheme set both ways.
+Para la creación del primer modelo se debía leer cuidadosamente los requerimientos, y a partir de estos sacar las entidades y sus atributos, así como las relaciones y las cardinalidades. 
+El ejercicio se logró exitosamente, sin embargo, hay aspectos a mejorar... 
