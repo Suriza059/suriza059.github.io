@@ -1092,9 +1092,10 @@ pre code {
 }
 
 .profile-photo {
-  width: 200px;
-  height: 200px;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--color-accent);
+  margin-right: 4rem;
 }
