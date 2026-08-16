@@ -1084,11 +1084,17 @@ pre code {
   display: block;
 }
 
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
 .profile-photo {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1.5rem;
   border: 2px solid var(--color-accent);
 }
