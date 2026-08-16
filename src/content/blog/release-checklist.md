@@ -6,7 +6,7 @@ tags:
   - base de datos
 description: 'Mi primer modelo entidad relación creado.'
 draft: false
-heroImage: ./entidad-relacion.jpg
+heroImage: ./entidad-relacion.jpeg
 ---
 
 ## ¿Qué se aprendió en clase?
