@@ -624,7 +624,8 @@ pre code {
   width: 100%;
   max-height: 420px;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--color-soft);
   margin-top: calc(var(--baseline) * 2);
   border: var(--hairline);
 }
