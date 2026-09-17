@@ -21,7 +21,7 @@ El ejercicio se logró exitosamente, sin embargo, hay aspectos a mejorar...
 
 ## Transformación MER
 
-./tallerTransformado.jpeg
+![Transformación MER](./tallerTransformado.jpeg)
 
 ### ¿Qué se aprendió en clase?
 
