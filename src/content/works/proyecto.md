@@ -11,3 +11,4 @@ El proyecto que voy a realizar con mis compañeros será a cerca de las personas
 Mas adelante se puede observar mas detalladamente nuestra propuesta
 
 **Propuesta de Proyecto**
+[Ver el documento en word](/Propuesta Bases (1).docx)
