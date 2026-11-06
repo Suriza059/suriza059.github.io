@@ -1106,3 +1106,9 @@ pre code {
   border: 2px solid var(--color-accent);
   margin-right: 2.5rem;
 }
+
+/* Dos imágenes una al lado de la otra */
+.prose .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-block: calc(var(--baseline) * 1.5); }
+.prose .img-row p { margin: 0; }
+.prose .img-row img { margin: 0; height: 100%; }
+@media (max-width: 640px) { .prose .img-row { grid-template-columns: 1fr; } }
