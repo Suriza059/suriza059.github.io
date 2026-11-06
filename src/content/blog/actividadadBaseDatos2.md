@@ -15,7 +15,7 @@ Aquí continúo con las actividades que realizo en la clase de bases de datos: l
 
 ## Normalización
 
-![Normalización](./normalizacion.jpeg)
+![Normalización](./Normalizacion.jpeg)
 
 ### ¿Qué se aprendió en clase?
 
