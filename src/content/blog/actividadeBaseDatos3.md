@@ -38,6 +38,8 @@ Primero se filtran los estudiantes de Ingeniería (σ) y luego se muestra solo s
 
 El docente explicó en clase mas a fondo con ejemplos y operadores como el producto cartesiano."
 
+![Álgebra relacional](./algebraEjemplo.jpeg)
+
 ---
 
 
