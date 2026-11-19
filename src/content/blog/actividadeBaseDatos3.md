@@ -64,4 +64,3 @@ El docente explicó en clase mas a fondo con ejemplos y operadores como el produ
 3. Consultas: SELECT, junto con WHERE, ORDER BY, GROUP BY y JOIN, para obtener la información que se necesita.
 
 ---
--->
