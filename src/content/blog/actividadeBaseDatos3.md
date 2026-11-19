@@ -10,7 +10,7 @@ draft: false
 ---
 ## Álgebra Relacional
 
-![Álgebra relacional](./algebra.jpg)
+![Álgebra relacional](./algebra.jpeg)
 
 ### ¿Qué se aprendió en clase?
 
