@@ -1,5 +1,5 @@
 ---
-title: 'Actividades de Bases de Datos, P3'
+title: 'Actividades de Bases de Datos - P3'
 publishDate: 2026-11-06
 tags:
   - sql
