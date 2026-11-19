@@ -12,9 +12,9 @@ draft: false
 
 <div class="img-row">
 
-![SQL 1](./sql1.jpeg)
+![SQL 1](./sql1.jpg)
 
-![SQL 2](./sql2.jpeg)
+![SQL 2](./sql2.jpg)
 
 </div>
 
