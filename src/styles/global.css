@@ -1106,6 +1106,10 @@ pre code {
   border: 2px solid var(--color-accent);
   margin-right: 2.5rem;
 }
+/* Tablas dentro de los posts */
+.prose table { width: 100%; border-collapse: collapse; margin-block: calc(var(--baseline) * 1.5); font-size: 0.95em; }
+.prose th, .prose td { border: var(--hairline); padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
+.prose th { background: var(--color-soft); }
 
 /* Dos imágenes una al lado de la otra */
 .prose .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-block: calc(var(--baseline) * 1.5); }
