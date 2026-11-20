@@ -43,7 +43,7 @@ El modelado es el primer paso para diseñar una base de datos: a partir de unos 
 
 En este ejercicio construí el Modelo Entidad Relación del universo de Juego de Tronos, la guia fue sacada de un enunciado online que hablaba sobre el Juego de Tronos. Pude identificar entidades como REINO, CIUDAD, CASA, CASTILLO, PERSONAJE, GUERRA y PROFESIÓN, con sus atributos y atributos clave. También modelé una especialización de PERSONAJE en HUMANO y CRIATURA, y relaciones entre varias entidades como la participación de personajes y casas en las guerras.
 
-✏️ **Lo que aprendí:** Este ejercicio me permitió entender mucho mejor como funciona realmente la construcción de un MER. Por otro lado, lo que se me dificultó mucho fue el tema de la participación y cardinalidad, pero con ayuda del docente y mis compañeros de clase pude entender mejor el ejercicio. 
+**Lo que aprendí:** Este ejercicio me permitió entender mucho mejor como funciona realmente la construcción de un MER. Por otro lado, lo que se me dificultó mucho fue el tema de la participación y cardinalidad, pero con ayuda del docente y mis compañeros de clase pude entender mejor el ejercicio. 
 
 ---
 
@@ -59,7 +59,7 @@ Taller realizado en grupo, en el que analizamos y transformamos a tablas un mode
 
 <a class="button" href="/tallerAvion.pdf" target="_blank" rel="noopener">Ver taller (PDF)</a>
 
-✏️ **Lo que aprendí:** Aprendí mediante el taller la identificación de cuales son las entidades que deben haber, sus atributos y sus relaciones. También el taller permitió profundizar en el concepto de agregación, y demás conceptos que no estaban del todo claros. 
+**Lo que aprendí:** Aprendí mediante el taller la identificación de cuales son las entidades que deben haber, sus atributos y sus relaciones. También el taller permitió profundizar en el concepto de agregación, y demás conceptos que no estaban del todo claros. 
 
 ---
 
