@@ -103,6 +103,6 @@ Una conclusión importante del taller: en el esquema normalizado las consultas p
 
 <a class="button" href="/TALLER_ENTREGA_BASES.xlsx">Descargar taller (Excel)</a>
 
-✏️ **Lo que aprendí:** escribe aquí qué aprendiste o qué se te dificultó en este taller.
+**Lo que aprendí:** Este taller me ayudó con la identificación de las dependencias funcionales, las claves primerias y foráneas. 
 
 ---
