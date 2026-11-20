@@ -3,6 +3,7 @@ title: 'Modelado'
 description: 'En esta sección se podrán encontrar las diversas evidencias realizadas durante el semestre respecto a este tema.'
 tech: ['MER', 'Transformación', 'Modelo relacional']
 order: 1
+publishDate: 2026-08-09
 ---
 
 El modelado es el primer paso para diseñar una base de datos: a partir de unos requerimientos se identifican los datos que se deben guardar y cómo se relacionan entre sí. Aquí reúno lo más importante del tema y las evidencias de los talleres que realizamos en clase.
@@ -62,5 +63,3 @@ Taller realizado en grupo, en el que analizamos y transformamos a tablas un mode
 
 ---
 
----
--->
