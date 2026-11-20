@@ -1,10 +1,79 @@
 ---
 title: 'SQL'
-description: ''
-tech: []
+description: 'Explicación de los principales comandos de SQL vistos en clase.'
+tech: ['DDL', 'DML', 'Consultas']
 order: 3
 publishDate: 2026-08-09
 ---
-## Brief
 
-## Approach
+SQL (Structured Query Language) es el lenguaje que se usa para crear, consultar y modificar bases de datos relacionales. Aquí explico los temas principales que vimos en clase.
+
+<div class="zigzag">
+
+<div class="fila">
+
+![DDL](./sql-1.jpeg)
+
+<div class="texto">
+
+<span class="num">01</span>
+
+### Definir la estructura (DDL)
+
+Con los comandos DDL se crea y se modifica la estructura de la base de datos: las tablas, sus columnas, sus tipos de datos y sus llaves. Los principales son **CREATE**, **ALTER** y **DROP**.
+
+</div>
+
+</div>
+
+<div class="fila">
+
+![DML](./sql-2.jpeg)
+
+<div class="texto">
+
+<span class="num">02</span>
+
+### Manipular los datos (DML)
+
+Con los comandos DML se trabaja sobre los registros de las tablas: **INSERT** agrega filas, **UPDATE** las modifica y **DELETE** las elimina. Con UPDATE y DELETE siempre se debe usar WHERE para no afectar toda la tabla.
+
+</div>
+
+</div>
+
+<div class="fila">
+
+![Consultas](./sql-3.jpeg)
+
+<div class="texto">
+
+<span class="num">03</span>
+
+### Consultar (SELECT)
+
+**SELECT** permite obtener la información que se necesita. Se combina con **WHERE** para filtrar, **ORDER BY** para ordenar y **GROUP BY** para agrupar junto con funciones como COUNT, SUM o AVG.
+
+</div>
+
+</div>
+
+<div class="fila">
+
+![JOIN](./sql-4.jpeg)
+
+<div class="texto">
+
+<span class="num">04</span>
+
+### Unir tablas (JOIN)
+
+Como la normalización separa los datos en varias tablas, **JOIN** sirve para volver a juntarlos usando las llaves que tienen en común. Hay varios tipos: INNER, LEFT, RIGHT y FULL JOIN.
+
+</div>
+
+</div>
+
+</div>
+
+✏️ **Lo que aprendí:** escribe aquí qué aprendiste o qué se te dificultó con SQL.
