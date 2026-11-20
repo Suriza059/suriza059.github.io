@@ -1114,3 +1114,9 @@ pre code {
 .prose tbody tr:nth-child(even) td { background: var(--color-surface); }
 .prose tbody tr:hover td { background: var(--color-accent-soft); }
 .prose td:first-child { font-weight: 600; color: var(--color-accent); }
+
+/* Dos imágenes una al lado de la otra */
+.prose .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-block: calc(var(--baseline) * 1.5); }
+.prose .img-row p { margin: 0; }
+.prose .img-row img { margin: 0; height: 100%; }
+@media (max-width: 640px) { .prose .img-row { grid-template-columns: 1fr; } }
