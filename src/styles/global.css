@@ -1129,3 +1129,28 @@ pre code {
 .prose .fila .texto h3 { margin-top: 0.25rem; }
 .prose .num { display: block; font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--color-accent); }
 @media (max-width: 640px) { .prose .fila { grid-template-columns: 1fr; gap: 1rem; } .prose .fila:nth-child(even) > p { order: 0; } }
+
+
+/* ---------- Página del proyecto ---------- */
+.prose .ficha { display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--color-text); border-bottom: 2px solid var(--color-text); margin-block: 0 calc(var(--baseline) * 2); }
+.prose .ficha > div { padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--color-line); }
+.prose .ficha > div:nth-last-child(-n+2) { border-bottom: 0; }
+.prose .ficha span, .prose .entregas .estado { display: block; font-size: 0.75em; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.3rem; }
+.prose .ficha p { margin: 0; }
+.prose .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-block: calc(var(--baseline) * 1.5); }
+.prose .galeria figure { margin: 0; }
+.prose .galeria img { margin: 0; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform 0.2s ease; }
+.prose .galeria a:hover img { transform: translateY(-3px); }
+.prose .galeria figcaption { margin-top: 0.5rem; font-size: 0.85em; color: var(--color-muted); }
+.prose .entregas { list-style: none; padding: 0; margin: calc(var(--baseline) * 1.5) 0 0; counter-reset: entrega; }
+.prose .entregas li { position: relative; padding: 0 0 2.25rem 3.5rem; margin: 0; counter-increment: entrega; }
+.prose .entregas li::before { content: counter(entrega, decimal-leading-zero); position: absolute; left: 0; top: 0; width: 2.4rem; height: 2.4rem; display: grid; place-items: center; border: 2px solid var(--color-line-strong); border-radius: 50%; background: var(--color-bg); font-family: var(--font-display); font-size: 0.95rem; color: var(--color-muted); }
+.prose .entregas li::after { content: ''; position: absolute; left: calc(1.2rem - 1px); top: 2.4rem; bottom: 0; width: 2px; background: var(--color-line); }
+.prose .entregas li:last-child::after { display: none; }
+.prose .entregas li.hecho::before { border-color: var(--color-accent); background: var(--color-accent); color: var(--color-on-accent); }
+.prose .entregas li:not(.hecho) .estado { color: var(--color-muted); }
+.prose .entregas h3 { margin: 0 0 0.35rem; }
+.prose .entregas p { margin: 0 0 0.9rem; }
+.prose .entregas .mini { display: block; margin-bottom: 0.9rem; }
+.prose .entregas .mini img { margin: 0; height: auto; max-height: 260px; }
+@media (max-width: 640px) { .prose .ficha, .prose .galeria { grid-template-columns: 1fr; } .prose .ficha > div:nth-last-child(2) { border-bottom: 1px solid var(--color-line); } }
